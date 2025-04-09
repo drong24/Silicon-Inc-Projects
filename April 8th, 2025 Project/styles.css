@@ -1,0 +1,43 @@
+
+:root {
+    --bg: rgb(249, 249, 249);
+    --fg: rgb(0,0,0);
+    --highlights: rgb(0, 185, 25);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    background-color: var(--bg);
+    color: var(--fg);
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
+form {
+    margin-left: 1.5rem;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border: 10px solid var(--highlights);
+    width: fit-content;
+}
+
+input[type=text], input[type=email], input[type=number], select {
+    padding: 5px;
+    width: 100%;
+}
+
+button {
+    padding: 7px;
+    background-color: var(--highlights);
+    width: 100%;
+}
+
+#comments {
+    height: 60px;
+    width: 100%;
+}
