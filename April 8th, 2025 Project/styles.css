@@ -13,17 +13,17 @@
     color: var(--fg);
 }
 
-label {
-    display: inline-block;
-    margin-bottom: 4px;
-}
-
 form {
     margin-left: 1.5rem;
     margin-top: 2rem;
     padding: 1.5rem;
     border: 10px solid var(--highlights);
     width: fit-content;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 4px;
 }
 
 input[type=text], input[type=email], input[type=number], select {
