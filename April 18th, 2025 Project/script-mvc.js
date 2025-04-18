@@ -30,7 +30,13 @@ const state = {
     renderView();
   }
   
-  
+  // removes todo item
+  function deleteTodo(toDoId) {
+    const index = state.todos.findIndex(x => x.id === toDoId);
+    state.todos.splice(index, 1);
+
+    renderView();
+  }
 
   // View
   const todoInput = document.querySelector("#todo-input");
@@ -42,6 +48,11 @@ const state = {
     const span = document.createElement("span");
     const deleteBtn = document.createElement("button");
     const checkbox = document.createElement("input");
+
+    deleteBtn.addEventListener("click", () => {
+        deleteTodo(todo.id);
+    });
+
     li.id = todo.id;
     checkbox.type = "checkbox";
     span.textContent = todo.title;
@@ -63,6 +74,8 @@ const state = {
     createTodo(todoInput.value);
     todoInput.value = "";
   });
+
+  
   
   renderView();
   
