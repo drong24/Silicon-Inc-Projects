@@ -78,6 +78,33 @@ const state = {
     li.append(input, confirmBtn, cancelBtn);
   }
 
+  function confirmEdit(id) {
+    const li = document.getElementById(id);
+    const text = li.querySelector(".input").value;
+
+    const span = document.createElement("span");
+    const deleteBtn = document.createElement("button");
+    const editBtn = document.createElement("button");
+    const checkbox = document.createElement("input");
+
+    span.classList.add("text-content");
+    checkbox.classList.add("checkbox");
+    deleteBtn.classList.add("delete-btn");
+    editBtn.classList.add("edit-btn");
+
+    checkbox.type = "checkbox";
+    span.textContent = text;
+    deleteBtn.textContent = "Delete";
+    editBtn.textContent = "Edit";
+    
+    li.innerHTML = '';
+    li.append(checkbox, span, deleteBtn, editBtn);
+  }
+
+  function cancelEdit(id) {
+
+  }
+
 
   // View
   const todoInput = document.querySelector("#todo-input");
@@ -129,7 +156,7 @@ const state = {
         console.log("edited!");
         editTodo(Number(li.id));
     } else if (e.target.className === 'confirm-btn') {
-
+        confirmEdit(Number(li.id));
     } else if (e.target.className === 'cancel-btn') {
 
     }
