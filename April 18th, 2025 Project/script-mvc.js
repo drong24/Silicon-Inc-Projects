@@ -45,7 +45,6 @@ const state = {
     const li = document.getElementById(id);
 
     const todo = state.todos.find(function(todo) {
-        console.log(todo.id + " - " + id);
         return todo.id === id;
     });
     todo.completed = !todo.completed;
@@ -58,51 +57,19 @@ const state = {
     renderView;
   }
 
-  // Edit todo content 
-  function editTodo(id) {
-    const li = document.getElementById(id);
-    const input = document.createElement("input");
-    const confirmBtn = document.createElement("button");
-    const cancelBtn = document.createElement("button");
-    const text = li.querySelector(".text-content").textContent;
-    
-    input.classList.add("input");
-    confirmBtn.classList.add("confirm-btn");
-    cancelBtn.classList.add("cancel-btn");
-
-    input.value = text;
-    confirmBtn.textContent = "Confirm";
-    cancelBtn.textContent = "Cancel";
-
-    li.innerHTML = '';
-    li.append(input, confirmBtn, cancelBtn);
-  }
-
   function confirmEdit(id) {
+    const todo = state.todos.find(function(todo) {
+        return todo.id === id;
+    });
     const li = document.getElementById(id);
     const text = li.querySelector(".input").value;
-
-    const span = document.createElement("span");
-    const deleteBtn = document.createElement("button");
-    const editBtn = document.createElement("button");
-    const checkbox = document.createElement("input");
-
-    span.classList.add("text-content");
-    checkbox.classList.add("checkbox");
-    deleteBtn.classList.add("delete-btn");
-    editBtn.classList.add("edit-btn");
-
-    checkbox.type = "checkbox";
-    span.textContent = text;
-    deleteBtn.textContent = "Delete";
-    editBtn.textContent = "Edit";
+    todo.title = text;
     
-    li.innerHTML = '';
-    li.append(checkbox, span, deleteBtn, editBtn);
+    renderView();
   }
 
   function cancelEdit(id) {
-
+      renderView();
   }
 
 
@@ -112,6 +79,8 @@ const state = {
   const listContainer = document.querySelector("#list-container");
   
   function createTodoNode(todo) {
+    console.log(todo);
+      console.log(todo.title);
     const li = document.createElement("li");
     const span = document.createElement("span");
     const deleteBtn = document.createElement("button");
@@ -131,6 +100,26 @@ const state = {
     li.append(checkbox, span, deleteBtn, editBtn);
   
     return li;
+  }
+
+  // Edit todo content 
+  function editTodoNode(id) {
+    const li = document.getElementById(id);
+    const input = document.createElement("input");
+    const confirmBtn = document.createElement("button");
+    const cancelBtn = document.createElement("button");
+    const text = li.querySelector(".text-content").textContent;
+    
+    input.classList.add("input");
+    confirmBtn.classList.add("confirm-btn");
+    cancelBtn.classList.add("cancel-btn");
+
+    input.value = text;
+    confirmBtn.textContent = "Confirm";
+    cancelBtn.textContent = "Cancel";
+
+    li.innerHTML = '';
+    li.append(input, confirmBtn, cancelBtn);
   }
   
   function renderView() {
@@ -154,11 +143,11 @@ const state = {
         toggleTodo(Number(li.id));
     } else if (e.target.className === 'edit-btn') {
         console.log("edited!");
-        editTodo(Number(li.id));
+        editTodoNode(Number(li.id));
     } else if (e.target.className === 'confirm-btn') {
         confirmEdit(Number(li.id));
     } else if (e.target.className === 'cancel-btn') {
-
+        cancelEdit(Number(li.id));
     }
   });  
   
