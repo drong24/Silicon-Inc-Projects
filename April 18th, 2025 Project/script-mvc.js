@@ -49,12 +49,7 @@ const state = {
     });
     todo.completed = !todo.completed;
 
-    if (todo.completed == true) {
-        li.classList.add("completed");
-    } else {
-        li.classList.remove("completed");
-    }
-    renderView;
+    renderView();
   }
 
   function confirmEdit(id) {
