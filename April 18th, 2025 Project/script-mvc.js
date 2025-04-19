@@ -31,10 +31,12 @@ const state = {
   }
   
   // removes todo item
-  function deleteTodo(toDoId) {
-    const index = state.todos.findIndex(x => x.id === toDoId);
-    state.todos.splice(index, 1);
+  function deleteTodo(id) {
+    const newToDos = state.todos.filter((todo) => {
+        return todo.id != id;
+    });
 
+    state.todos = newToDos;
     renderView();
   }
 
@@ -49,9 +51,8 @@ const state = {
     const deleteBtn = document.createElement("button");
     const checkbox = document.createElement("input");
 
-    deleteBtn.addEventListener("click", () => {
-        deleteTodo(todo.id);
-    });
+    deleteBtn.classList.add("delete-btn");
+    checkbox.classList.add("checkbox");
 
     li.id = todo.id;
     checkbox.type = "checkbox";
@@ -75,7 +76,14 @@ const state = {
     todoInput.value = "";
   });
 
-  
+  listContainer.addEventListener('click', (e) => {
+    const li = e.target.parentElement;
+    if (e.target.className === 'delete-btn') {
+        deleteTodo(li.id);
+    } else if (e.target.className === 'checkbox') {
+        console.log(li.id + " checkbox");
+    }
+  });  
   
   renderView();
   
