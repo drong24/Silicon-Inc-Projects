@@ -77,10 +77,11 @@ const state = {
   const todoInput = document.querySelector("#todo-input");
   const addBtn = document.querySelector("#add-btn");
   const listContainer = document.querySelector("#list-container");
+  const allLink = document.getElementById("all-link");
+  const activeLink = document.getElementById("active-link");
+  const completedLink = document.getElementById("completed-link");
   
   function createTodoNode(todo) {
-    console.log(todo);
-      console.log(todo.title);
     const li = document.createElement("li");
     const span = document.createElement("span");
     const deleteBtn = document.createElement("button");
@@ -91,6 +92,10 @@ const state = {
     checkbox.classList.add("checkbox");
     deleteBtn.classList.add("delete-btn");
     editBtn.classList.add("edit-btn");
+    if (todo.completed == true) {
+        span.classList.add("completed");
+        checkbox.checked = true;
+    }
 
     li.id = todo.id;
     checkbox.type = "checkbox";
@@ -103,7 +108,7 @@ const state = {
   }
 
   // Edit todo content 
-  function editTodoNode(id) {
+  function createTodoNodeEditor(id) {
     const li = document.getElementById(id);
     const input = document.createElement("input");
     const confirmBtn = document.createElement("button");
@@ -124,11 +129,40 @@ const state = {
   
   function renderView() {
     listContainer.innerHTML = "";
-    state.todos.forEach(function (todo) {
+    const selected = document.querySelector(".selected").innerHTML;
+    let newTodos = state.todos;
+
+    if (selected == "Active") {
+        newTodos = state.todos.filter((todo) => {
+            return todo.completed == false;
+        });
+    } else if (selected == "Completed") {
+        newTodos = state.todos.filter((todo) => {
+            return todo.completed == true;
+        });
+    }
+
+    newTodos.forEach(function (todo) {
       const li = createTodoNode(todo);
       listContainer.append(li);
     });
   }
+
+  allLink.addEventListener("click", () => {
+    document.querySelector(".selected").classList.remove("selected");
+    allLink.classList.add("selected");
+    renderView();
+  });
+  activeLink.addEventListener("click", () => {
+    document.querySelector(".selected").classList.remove("selected");
+    activeLink.classList.add("selected");
+    renderView();
+  });
+  completedLink.addEventListener("click", () => {
+    document.querySelector(".selected").classList.remove("selected");
+    completedLink.classList.add("selected");
+    renderView();
+  });
   
   addBtn.addEventListener("click", () => {
     createTodo(todoInput.value);
@@ -142,8 +176,7 @@ const state = {
     } else if (e.target.className === 'checkbox') {
         toggleTodo(Number(li.id));
     } else if (e.target.className === 'edit-btn') {
-        console.log("edited!");
-        editTodoNode(Number(li.id));
+        createTodoNodeEditor(Number(li.id));
     } else if (e.target.className === 'confirm-btn') {
         confirmEdit(Number(li.id));
     } else if (e.target.className === 'cancel-btn') {
