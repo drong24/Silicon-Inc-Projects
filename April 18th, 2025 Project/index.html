@@ -8,15 +8,19 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Todo app</h1>
-    <ul>
-        <li ><button id="all-link" class="selected">All</button></li>
-        <li><button id="active-link">Active</button></li>
-        <li><button id="completed-link">Completed</button></li>
-    </ul>
-    <input id="todo-input" />
-    <button id="add-btn">Add</button>
-    <ul id="list-container"></ul>
+    <div class="main">
+        <h1>Todo app</h1>
+        <ul class="filter-buttons">
+            <li ><button id="all-link" class="selected">All</button></li>
+            <li><button id="active-link">Active</button></li>
+            <li><button id="completed-link">Completed</button></li>
+        </ul>
+        <div class="input-container">
+            <input id="todo-input" />
+            <button id="add-btn">Add</button>
+        </div>
+        <ul id="list-container"></ul>
+    </div>
 
     <!-- <script src="script.js"></script> -->
     <script src="script-mvc.js"></script>
