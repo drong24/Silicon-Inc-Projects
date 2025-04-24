@@ -5,8 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.0/css/ionicons.min.css"
+        integrity="sha512-JApjWRnfonFeGBY7t4yq8SWr1A6xVYEJgO/UMIYONxaR3C9GETKUg0LharbJncEzJF5Nmiv+Pr5QNulr81LjGQ=="
+        crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img src="./title-logo.svg" alt="the movie db logo">
+            </div>
+            <div>
+                <ul class="nav_bar">
+                    <li class="tab-item">HOME</li>
+                    <li class="tab-item">LIKED</li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="select_container">
+            <select class="filter-select">
+                <option value="popular">Popular</option>
+                <option value="now_playing">Now Playing</option>
+                <option value="top_rated">Top Rated</option>
+                <option value="upcoming">Upcoming</option>
+            </select>
+        </div>
+        <div class="pagination_contianer"></div>
+        <div id="home_container" class="tab_view tab_active"></div>
+        <div id="liked_container" class="tab_view"></div>
+    </main>
+    <i class="ion-ios-infinite-outline"></i>
+    <i class="ion-ios-heart-outline"></i>
+    <script src="./script.js"></script>
 </body>
 </html>
