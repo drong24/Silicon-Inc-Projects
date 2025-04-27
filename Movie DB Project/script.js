@@ -37,6 +37,9 @@ function fetchMovies(pageNum = 1) {
 
 const homeContainer = document.getElementById("home_container");
 const likeContainer = document.getElementById("liked_container");
+const tabContainer = document.querySelector(".tab_bar");
+const homeTab = document.getElementById("home");
+const likedTab = document.getElementById("liked");
 const selectFilter = document.querySelector(".filter_select");
 const navigationContainer = document.querySelector(".navigation_contianer");
 const currentPageNode = document.getElementById("currentPage");
@@ -82,6 +85,19 @@ function createMovieNode(movie) {
     return movieContainer;
 }
 
+tabContainer.addEventListener("click", (e) => {
+    if(e.target.id === "home") {
+        homeContainer.classList.add("active_tab");
+        homeTab.classList.add("active");
+        likeContainer.classList.remove("active_tab");
+        likedTab.classList.remove("active");
+    } else if (e.target.id === "liked") {
+        homeContainer.classList.remove("active_tab");
+        homeTab.classList.remove("active");
+        likeContainer.classList.add("active_tab");
+        likedTab.classList.add("active");
+    } 
+});
 selectFilter.addEventListener("change", () => {
     fetchMovies().then(() => {
         renderHome();

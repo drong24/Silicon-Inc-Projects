@@ -26,11 +26,11 @@ nav {
     height: fit-content;
 }
 
-.nav_bar {
+.tab_bar {
     display: flex;
 }
 
-.nav_bar li {
+.tab_bar li {
     list-style: none;
     margin-left: 3rem;
     font-size: 1.5rem;
@@ -58,16 +58,16 @@ nav {
 
 .tab_view {
     display: none;
-}
-
-.tab_active {
-    display: block;
-}
-
-#home_container {
-    display: grid;
     grid-template-columns: 20% 20% 20% 20%;
     grid-gap: 3rem;
+}
+
+.active {
+    border-bottom: 4px solid var(--accent);
+}
+
+.active_tab {
+    display: grid;
 }
 
 .movie_container {

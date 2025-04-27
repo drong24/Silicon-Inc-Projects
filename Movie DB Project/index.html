@@ -20,9 +20,9 @@
                 <img src="./title-logo.svg" alt="the movie db logo">
             </div>
             <div>
-                <ul class="nav_bar">
-                    <li class="tab_item">HOME</li>
-                    <li class="tab_item">LIKED</li>
+                <ul class="tab_bar">
+                    <li id="home" class="tab_item active">HOME</li>
+                    <li id="liked" class="tab_item">LIKED</li>
                 </ul>
             </div>
         </nav>
@@ -41,12 +41,8 @@
               <p id="currentPage"></p>
               <button id="nextButton" class="nav_btn">Next</button>
         </div>
-        <div id="home_container" class="tab_view tab_active">
-            <div class="list-container" id="movie_list"></div>
-        </div>
-        <div id="liked_container" class="tab_view">
-            <div id="liked_list" class="list-container"></div>
-        </div>
+        <div id="home_container" class="tab_view active_tab"></div>
+        <div id="liked_container" class="tab_view"></div>
     </main>
     <div id="modal">
         <div class="modal_container">
