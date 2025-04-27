@@ -109,3 +109,11 @@ nav {
     width: 100%;
     height: auto;
 }
+
+.ion-star {
+    color: #f5c518;
+}
+
+.ion-ios-heart {
+    color: red;
+}
