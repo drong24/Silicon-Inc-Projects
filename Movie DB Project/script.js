@@ -1,11 +1,7 @@
 
 // Model
 
-MOVIE_DETAILS = ""
-NOW_PLAYING = ""
-POPULAR = "https://api.themoviedb.org/3/movie/popular"
-TOP_RATED = ""
-UPCOMING = ""
+BASE_URL = "https://api.themoviedb.org/3/movie/"
 
 
 const state = {
@@ -16,8 +12,11 @@ const state = {
 
 //Controller
 
-function fetchPopular(pageNum = 1) {
-    return fetch (`${POPULAR}?api_key=124471754942997e76b157aefcfb80c2&page=${pageNum}`)
+function fetchMovies(pageNum = 1) {
+    const activeFilter = document.querySelector(".filter_select").value;
+    console.log(activeFilter);
+
+    return fetch (`${BASE_URL}${activeFilter}?api_key=124471754942997e76b157aefcfb80c2&page=${pageNum}`)
     .then((resp) => {
         if (resp.ok) {
             return resp.json();
@@ -36,7 +35,7 @@ function fetchPopular(pageNum = 1) {
 
 const homeContainer = document.getElementById("home_container");
 const likeContainer = document.getElementById("liked_container");
-const select = document.querySelector(".filter_select");
+const selectFilter = document.querySelector(".filter_select");
 
 function renderHome() {
     homeContainer.innerHTML = '';
@@ -52,11 +51,6 @@ function renderLiked() {
     likeContainer.innerHTML = '';
 }
 
-function checkActive() {
-    if (select.value == "popular") {
-        fetchPopular();
-    }
-}
 
 function createMovieNode(movie) {
     const movieContainer = document.createElement("div");
@@ -81,8 +75,14 @@ function createMovieNode(movie) {
     return movieContainer;
 }
 
+selectFilter.addEventListener("change", () => {
+    fetchMovies().then(() => {
+        renderHome();
+    });
+});
+
 function onLoad() {
-    fetchPopular().then(() => {
+    fetchMovies().then(() => {
         renderHome();
     });
 }
