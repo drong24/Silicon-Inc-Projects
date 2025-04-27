@@ -171,6 +171,10 @@ function displayModal() {
         modalContainer.append(exitButton, modalContent);
 }
 
+function closeModal() {
+    modalBg.classList.remove("modal_active");
+}
+
 tabContainer.addEventListener("click", (e) => {
     if(e.target.id === "home") {
         homeContainer.classList.add("active_tab");
@@ -222,6 +226,13 @@ likeContainer.addEventListener("click", (e) => {
     if (e.target.classList.contains("movie_title")) {
         console.log("name clicked!")
         displayModal(e.target.id, "liked");
+    }
+});
+
+modalContainer.addEventListener("click", (e) => {
+    console.log(e.target);
+    if (e.target.parentNode.classList.contains("exit_button")) {
+        closeModal();
     }
 });
 
