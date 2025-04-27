@@ -124,6 +124,7 @@ tabContainer.addEventListener("click", (e) => {
     } 
 });
 selectFilter.addEventListener("change", () => {
+    state.pageNum = 1;
     fetchMovies().then(() => {
         renderHome();
         renderNavBar();
