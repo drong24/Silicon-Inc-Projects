@@ -16,7 +16,7 @@ nav {
     align-items: center;
 }
 
-.logo-container {
+.logo_container {
     width: 100px;
     height: fit-content;
 }
@@ -39,7 +39,7 @@ nav {
     background-color: #01b4e4;
 }
 
-.pagination-container {
+.pagination_container {
     display: flex;
     justify-content: space-between;
     align-items: center;

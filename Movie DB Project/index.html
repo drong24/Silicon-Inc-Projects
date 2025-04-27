@@ -16,32 +16,48 @@
 <body>
     <header>
         <nav>
-            <div class="logo-container">
+            <div class="logo_container">
                 <img src="./title-logo.svg" alt="the movie db logo">
             </div>
             <div>
                 <ul class="nav_bar">
-                    <li class="tab-item">HOME</li>
-                    <li class="tab-item">LIKED</li>
+                    <li class="tab_item">HOME</li>
+                    <li class="tab_item">LIKED</li>
                 </ul>
             </div>
         </nav>
     </header>
     <main>
         <div class="select_container">
-            <select class="filter-select">
+            <select class="filter_select">
                 <option value="popular">Popular</option>
                 <option value="now_playing">Now Playing</option>
                 <option value="top_rated">Top Rated</option>
                 <option value="upcoming">Upcoming</option>
             </select>
         </div>
-        <div class="pagination_contianer"></div>
-        <div id="home_container" class="tab_view tab_active"></div>
-        <div id="liked_container" class="tab_view"></div>
+        <div class="pagination_contianer">
+            <button id="prevButton" class="btn">prev</button>
+              <p id="currentPage"></p>
+              <button id="nextButton" class="btn">Next</button>
+        </div>
+        <div id="home_container" class="tab_view tab_active">
+            <div class="list-container" id="movie_list"></div>
+        </div>
+        <div id="liked_container" class="tab_view">
+            <div id="liked_list" class="list-container"></div>
+        </div>
     </main>
-    <i class="ion-ios-infinite-outline"></i>
-    <i class="ion-ios-heart-outline"></i>
+    <div id="modal">
+        <div class="modal_container">
+          <div class="close_modal">
+            <i class="icon ion-md-close"></i>
+          </div>
+          <div class="modal_content"></div>
+        </div>
+      </div>
+    
+    
     <script src="./script.js"></script>
 </body>
 </html>
