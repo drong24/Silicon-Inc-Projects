@@ -2,13 +2,14 @@
 // Model
 
 BASE_URL = "https://api.themoviedb.org/3/movie/"
-
+MOVIE_DETAIL_URL = "https://api.themoviedb.org/3/keyword/"
 
 const state = {
     movies: [],
     liked: [],
     pageNum: 1,
     totalPages: 0,
+    currMovieData: null,
 };
 
 //Controller
@@ -27,6 +28,23 @@ function fetchMovies(pageNum = 1) {
         state.movies = data.results;
         state.totalPages = data.total_pages;
         console.log(data);
+    })
+    .catch((e) => {
+        console.log("error!", e);
+    });   
+}
+
+function fetchMovieData(target) {
+    const id = target.closest(".movie_container").id;
+    return fetch (`${BASE_URL}${id}?api_key=124471754942997e76b157aefcfb80c2`)
+    .then((resp) => {
+        if (resp.ok) {
+            return resp.json();
+        }
+    })
+    .then((data) => {
+        state.currMovieData = data;
+        console.log(data);        
     })
     .catch((e) => {
         console.log("error!", e);
@@ -62,6 +80,8 @@ const likedTab = document.getElementById("liked");
 const selectFilter = document.querySelector(".filter_select");
 const navigationContainer = document.querySelector(".navigation_contianer");
 const currentPageNode = document.getElementById("currentPage");
+const modalBg = document.querySelector(".modal");
+const modalContainer = document.querySelector(".modal_container");
 
 function renderNavBar() {
     currentPageNode.innerHTML = `${state.pageNum} / ${state.totalPages}`;
@@ -100,7 +120,7 @@ function createMovieNode(movie) {
     
     imgContainer.innerHTML = `<img src=${imgSrc}></img>`;
     movieInfo.innerHTML = 
-    `<h4>${movie.title}</h4>
+    `<h4 class="movie_title">${movie.title}</h4>
     <div>
         <i class="ion-star"></i>
         <span>${movie.popularity}</span>
@@ -108,6 +128,42 @@ function createMovieNode(movie) {
     </div> `;
     movieContainer.append(imgContainer, movieInfo);    
     return movieContainer;
+}
+
+function displayModal() {
+    const movie = state.currMovieData;
+    const imgSrc = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+    modalBg.classList.add("modal_active");
+
+    const exitButton = document.createElement("button");
+    const modalContent = document.createElement("div");
+    const modalImgContainer = document.createElement("div");
+    const modalInfoContainer = document.createElement("div");
+    let genreHTMLList = "";
+    let companiesHTMLList = "";
+    
+    movie.genres.forEach(genre => {
+        genreHTMLList += `<li>${genre}</li>`;
+    });
+    movie.production_companies.forEach(company => {
+        companiesHTMLList += `<li><img src=https://image.tmdb.org/t/p/w500${company.logo_path}></img></li>`
+    });
+
+    exitButton.innerHTML = `<i class="icon ion-md-close"></i>`;
+    modalImgContainer.innerHTML = `<img src=${imgSrc}></img>`;
+    modalInfoContainer.innerHTML = 
+        `<h2>${movie.title}</h2>
+        <h3>Overview</h3>
+        <p>${movie.overview}</p>
+        <h3>Genres</h3>
+        <ul>${genreHTMLList}</ul>
+        <h3>Rating</h3>
+        <p>${movie.popularity}</p>
+        <h3>Production companies</h3>
+        <ul>${companiesHTMLList}</ul>`;
+    
+        modalContent.append(modalImgContainer, modalInfoContainer);
+        modalContainer.append(modalContent, exitButton);
 }
 
 tabContainer.addEventListener("click", (e) => {
@@ -142,13 +198,25 @@ navigationContainer.addEventListener("click", (e) => {
     });
 });
 homeContainer.addEventListener("click", (e) => {
+    console.log(e.target);
     if (e.target.classList.contains("like_btn")) {
         handleLike(e.target);
     }
+    if (e.target.classList.contains("movie_title")) {
+        fetchMovieData(e.target).then(() => {
+            console.log(state.currMovieData);
+            displayModal();
+        });
+    }
 });
 likeContainer.addEventListener("click", (e) => {
+    console.log(e.target);
     if (e.target.classList.contains("like_btn")) {
         handleLike(e.target);
+    }
+    if (e.target.classList.contains("movie_title")) {
+        console.log("name clicked!")
+        displayModal(e.target.id, "liked");
     }
 });
 
