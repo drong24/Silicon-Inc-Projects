@@ -34,11 +34,16 @@ function fetchMovies(pageNum = 1) {
 }
 
 function handleLike(target) {
+    console.log(target);
     const id = Number(target.closest(".movie_container").id);
     const liked = state.liked.some((movie) => movie.id == id);
     if (liked) {
+        target.classList.remove("ion-ios-heart");
+        target.classList.add("ion-ios-heart-outline");
         state.liked = state.liked.filter((movie) => movie.id !== id);
     } else {
+        target.classList.remove("ion-ios-heart-outline");
+        target.classList.add("ion-ios-heart");
         const movieData = state.movies.find((movie) => movie.id === id);
         console.log(movieData);
         state.liked.push(movieData);
@@ -145,8 +150,6 @@ likeContainer.addEventListener("click", (e) => {
         handleLike(e.target);
     }
 });
-
-
 
 function onLoad() {
     fetchMovies().then(() => {
