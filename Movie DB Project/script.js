@@ -7,7 +7,8 @@ BASE_URL = "https://api.themoviedb.org/3/movie/"
 const state = {
     movies: [],
     liked: [],
-    activeFilter: 'popular'
+    pageNum: 1,
+    totalPages: 0,
 };
 
 //Controller
@@ -24,7 +25,8 @@ function fetchMovies(pageNum = 1) {
     })
     .then((data) => {
         state.movies = data.results;
-        console.log(state.movies);
+        state.totalPages = data.total_pages;
+        console.log(data);
     })
     .catch((e) => {
         console.log("error!", e);
@@ -36,6 +38,12 @@ function fetchMovies(pageNum = 1) {
 const homeContainer = document.getElementById("home_container");
 const likeContainer = document.getElementById("liked_container");
 const selectFilter = document.querySelector(".filter_select");
+const navigationContainer = document.querySelector(".navigation_contianer");
+const currentPageNode = document.getElementById("currentPage");
+
+function renderNavBar() {
+    currentPageNode.innerHTML = `${state.pageNum} / ${state.totalPages}`;
+}
 
 function renderHome() {
     homeContainer.innerHTML = '';
@@ -50,7 +58,6 @@ function renderHome() {
 function renderLiked() {
     likeContainer.innerHTML = '';
 }
-
 
 function createMovieNode(movie) {
     const movieContainer = document.createElement("div");
@@ -78,12 +85,26 @@ function createMovieNode(movie) {
 selectFilter.addEventListener("change", () => {
     fetchMovies().then(() => {
         renderHome();
+        renderNavBar();
     });
 });
+navigationContainer.addEventListener("click", (e) => {
+    if (e.target.id === 'prevButton') {
+        state.pageNum = (state.pageNum <= 1) ? 1 : state.pageNum - 1;
+    } else if (e.target.id === 'nextButton') {
+        state.pageNum = (state.pageNum >= state.totalPages) ? 1 : state.pageNum + 1;
+    }
+    fetchMovies(state.pageNum).then(() => {
+        renderHome();
+        renderNavBar();
+    });
+});
+
 
 function onLoad() {
     fetchMovies().then(() => {
         renderHome();
+        renderNavBar();
     });
 }
 

@@ -38,7 +38,7 @@ nav {
     background-color: #01b4e4;
 }
 
-.pagination_container {
+.navigation_contianer {
     display: flex;
     justify-content: space-between;
     align-items: center;
