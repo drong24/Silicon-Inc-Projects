@@ -148,7 +148,7 @@ function displayModal() {
     modalInfoContainer.classList.add("modal_info");
     
     movie.genres.forEach(genre => {
-        genreHTMLList += `<li>${genre}</li>`;
+        genreHTMLList += `<li>${genre.name}</li>`;
     });
     movie.production_companies.forEach(company => {
         companiesHTMLList += `<li><img src=https://image.tmdb.org/t/p/w500${company.logo_path}></img></li>`
