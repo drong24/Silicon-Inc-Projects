@@ -44,6 +44,7 @@ function handleLike(target) {
         state.liked.push(movieData);
     }
     console.log(state.liked);
+    renderLiked();
 }
 
 //View
@@ -63,7 +64,7 @@ function renderNavBar() {
 
 function renderHome() {
     homeContainer.innerHTML = '';
-    let movieList = state.movies;
+    const movieList = state.movies;
 
     movieList.forEach(function (movie) {
         const li = createMovieNode(movie);
@@ -73,6 +74,12 @@ function renderHome() {
 
 function renderLiked() {
     likeContainer.innerHTML = '';
+    const likedList = state.liked;
+
+    likedList.forEach(function (movie) {
+        const li = createMovieNode(movie);
+        likeContainer.append(li);
+      });
 }
 
 function createMovieNode(movie) {
@@ -129,6 +136,11 @@ navigationContainer.addEventListener("click", (e) => {
     });
 });
 homeContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("like_btn")) {
+        handleLike(e.target);
+    }
+});
+likeContainer.addEventListener("click", (e) => {
     if (e.target.classList.contains("like_btn")) {
         handleLike(e.target);
     }
