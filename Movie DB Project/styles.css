@@ -2,7 +2,6 @@
 * {
     margin: 0;
     padding: 0;
-    border: 1px solid red;
 }
 
 body {
@@ -53,4 +52,45 @@ nav {
 
 .tab_active {
     display: block;
+}
+
+#home_container {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20%;
+    grid-gap: 3rem;
+}
+
+.movie_container {
+    border: 1px solid black;
+}
+
+.movie_info_container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.movie_info_container > h4{
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.movie_info_container > div {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.movie_info_container > div > i:first-child {
+    margin-right: 10px;
+}
+
+.movie_info_container > div > i:last-child {
+    margin-left: auto;
+}
+
+.movie_img_container img {
+    width: 100%;
+    height: auto;
 }

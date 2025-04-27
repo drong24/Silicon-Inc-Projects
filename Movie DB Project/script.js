@@ -63,6 +63,10 @@ function createMovieNode(movie) {
     const imgContainer = document.createElement("div");
     const movieInfo = document.createElement("div");
     const imgSrc = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+
+    movieContainer.classList.add("movie_container");
+    imgContainer.classList.add("movie_img_container");
+    movieInfo.classList.add("movie_info_container");
     
     imgContainer.innerHTML = `<img src=${imgSrc}></img>`;
     movieInfo.innerHTML = 
