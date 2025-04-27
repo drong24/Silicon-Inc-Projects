@@ -141,6 +141,11 @@ function displayModal() {
     const modalInfoContainer = document.createElement("div");
     let genreHTMLList = "";
     let companiesHTMLList = "";
+
+    exitButton.classList.add("exit_button");
+    modalContent.classList.add("modal_content");
+    modalImgContainer.classList.add("modal_img_container");
+    modalInfoContainer.classList.add("modal_info");
     
     movie.genres.forEach(genre => {
         genreHTMLList += `<li>${genre}</li>`;
@@ -149,21 +154,21 @@ function displayModal() {
         companiesHTMLList += `<li><img src=https://image.tmdb.org/t/p/w500${company.logo_path}></img></li>`
     });
 
-    exitButton.innerHTML = `<i class="icon ion-md-close"></i>`;
+    exitButton.innerHTML = `<i class="icon ion-close-round"></i>`;
     modalImgContainer.innerHTML = `<img src=${imgSrc}></img>`;
     modalInfoContainer.innerHTML = 
         `<h2>${movie.title}</h2>
         <h3>Overview</h3>
         <p>${movie.overview}</p>
         <h3>Genres</h3>
-        <ul>${genreHTMLList}</ul>
+        <ul class="genre_list">${genreHTMLList}</ul>
         <h3>Rating</h3>
         <p>${movie.popularity}</p>
         <h3>Production companies</h3>
-        <ul>${companiesHTMLList}</ul>`;
+        <ul class="company_list">${companiesHTMLList}</ul>`;
     
         modalContent.append(modalImgContainer, modalInfoContainer);
-        modalContainer.append(modalContent, exitButton);
+        modalContainer.append(exitButton, modalContent);
 }
 
 tabContainer.addEventListener("click", (e) => {

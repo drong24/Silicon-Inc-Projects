@@ -140,3 +140,66 @@ nav {
 .modal_active {
     display: flex;
 }
+
+.exit_button {
+    padding: 1rem;
+    font-size: 2rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    background-color: inherit;
+    border: none;
+}
+
+.modal_content {
+    display: flex;
+    padding: 4rem;
+}
+
+.modal_img_container {
+    width: 33.33%;
+    flex-shrink: 0;
+}
+
+.modal_img_container img {
+    width: 100%;
+    height: auto;
+}
+
+.modal_info {
+    padding-left: 2rem;
+}
+
+.modal_info h2 {
+    margin-bottom: 20px;
+}
+
+.modal_info h3 {
+    margin-top: 15px;
+}
+
+.modal_info > ul {
+    display: flex;
+}
+
+.genre_list li {
+    list-style-type: none;
+    padding: 0.5rem;
+    background-color: #90cea1;
+    margin-left: 1rem;
+    color: white;
+    border-radius: 5px;
+}
+
+.company_list li {
+    width: 30px;
+    margin-right: 1rem;
+    list-style-type: none;
+}
+
+.company_list img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+} 
