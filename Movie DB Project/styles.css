@@ -30,6 +30,13 @@ nav {
     font-size: 1.5rem;
 }
 
+.nav_btn {
+    padding: 8px;
+    background-color: #01b4e4;
+    border: 1px solid white;
+    color: white;
+}
+
 .active::after {
     content: "";
     width: 100%;
