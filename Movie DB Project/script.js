@@ -2,7 +2,6 @@
 // Model
 
 BASE_URL = "https://api.themoviedb.org/3/movie/"
-MOVIE_DETAIL_URL = "https://api.themoviedb.org/3/keyword/"
 
 const state = {
     movies: [],
@@ -109,6 +108,7 @@ function createMovieNode(movie) {
     const imgContainer = document.createElement("div");
     const movieInfo = document.createElement("div");
     const imgSrc = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+    const liked = state.liked.some((likedMovie) => likedMovie.id === movie.id);
 
     movieContainer.classList.add("movie_container");
     movieContainer.id = movie.id;
@@ -121,7 +121,7 @@ function createMovieNode(movie) {
     <div>
         <i class="ion-star"></i>
         <span>${movie.popularity}</span>
-        <i class="like_btn ion-ios-heart-outline"></i>
+        <i class="like_btn ${liked ? `ion-ios-heart` : 'ion-ios-heart-outline'}"></i>
     </div> `;
     movieContainer.append(imgContainer, movieInfo);    
     return movieContainer;
@@ -215,7 +215,6 @@ homeContainer.addEventListener("click", (e) => {
     }
 });
 likeContainer.addEventListener("click", (e) => {
-    console.log(e.target);
     if (e.target.classList.contains("like_btn")) {
         handleLike(e.target);
     }
