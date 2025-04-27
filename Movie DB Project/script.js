@@ -16,7 +16,6 @@ const state = {
 
 function fetchMovies(pageNum = 1) {
     const activeFilter = document.querySelector(".filter_select").value;
-    console.log(activeFilter);
 
     return fetch (`${BASE_URL}${activeFilter}?api_key=124471754942997e76b157aefcfb80c2&page=${pageNum}`)
     .then((resp) => {
@@ -44,7 +43,7 @@ function fetchMovieData(target) {
     })
     .then((data) => {
         state.currMovieData = data;
-        console.log(data);        
+        console.log(data);
     })
     .catch((e) => {
         console.log("error!", e);
@@ -52,7 +51,6 @@ function fetchMovieData(target) {
 }
 
 function handleLike(target) {
-    console.log(target);
     const id = Number(target.closest(".movie_container").id);
     const liked = state.liked.some((movie) => movie.id == id);
     if (liked) {
@@ -63,10 +61,9 @@ function handleLike(target) {
         target.classList.remove("ion-ios-heart-outline");
         target.classList.add("ion-ios-heart");
         const movieData = state.movies.find((movie) => movie.id === id);
-        console.log(movieData);
         state.liked.push(movieData);
     }
-    console.log(state.liked);
+
     renderLiked();
 }
 
@@ -131,6 +128,7 @@ function createMovieNode(movie) {
 }
 
 function displayModal() {
+    modalContainer.innerHTML = '';
     const movie = state.currMovieData;
     const imgSrc = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
     modalBg.classList.add("modal_active");
@@ -207,13 +205,11 @@ navigationContainer.addEventListener("click", (e) => {
     });
 });
 homeContainer.addEventListener("click", (e) => {
-    console.log(e.target);
     if (e.target.classList.contains("like_btn")) {
         handleLike(e.target);
     }
     if (e.target.classList.contains("movie_title")) {
         fetchMovieData(e.target).then(() => {
-            console.log(state.currMovieData);
             displayModal();
         });
     }
@@ -230,7 +226,6 @@ likeContainer.addEventListener("click", (e) => {
 });
 
 modalContainer.addEventListener("click", (e) => {
-    console.log(e.target);
     if (e.target.parentNode.classList.contains("exit_button")) {
         closeModal();
     }
