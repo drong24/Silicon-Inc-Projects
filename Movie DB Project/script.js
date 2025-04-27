@@ -33,6 +33,19 @@ function fetchMovies(pageNum = 1) {
     });   
 }
 
+function handleLike(target) {
+    const id = Number(target.closest(".movie_container").id);
+    const liked = state.liked.some((movie) => movie.id == id);
+    if (liked) {
+        state.liked = state.liked.filter((movie) => movie.id !== id);
+    } else {
+        const movieData = state.movies.find((movie) => movie.id === id);
+        console.log(movieData);
+        state.liked.push(movieData);
+    }
+    console.log(state.liked);
+}
+
 //View
 
 const homeContainer = document.getElementById("home_container");
@@ -69,6 +82,7 @@ function createMovieNode(movie) {
     const imgSrc = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
     movieContainer.classList.add("movie_container");
+    movieContainer.id = movie.id;
     imgContainer.classList.add("movie_img_container");
     movieInfo.classList.add("movie_info_container");
     
@@ -78,9 +92,8 @@ function createMovieNode(movie) {
     <div>
         <i class="ion-star"></i>
         <span>${movie.popularity}</span>
-        <i class="ion-ios-heart-outline"></i>
+        <i class="like_btn ion-ios-heart-outline"></i>
     </div> `;
-    
     movieContainer.append(imgContainer, movieInfo);    
     return movieContainer;
 }
@@ -115,6 +128,12 @@ navigationContainer.addEventListener("click", (e) => {
         renderNavBar();
     });
 });
+homeContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("like_btn")) {
+        handleLike(e.target);
+    }
+});
+
 
 
 function onLoad() {
