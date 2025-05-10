@@ -1,6 +1,7 @@
 import { useState } from 'react'
-//import { Routes, Route, Link } from 'react-router'
+import { Routes, Route, Link} from 'react-router'
 import Header from './Header'
+import Home from './Home';
 import { TABS } from './constants';
 import './App.css'
 
@@ -13,13 +14,13 @@ function App() {
     console.log(activeTab);
   }
   return (
-    <>
-      <div>
-        <div>Movie DB Project</div>
-        <Header active={activeTab} onClick={handleTabClick}/>
-      </div>
-    </>
-  )
+    <div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route />
+      </Routes>
+    </div>
+  );
 }
 
 export default App

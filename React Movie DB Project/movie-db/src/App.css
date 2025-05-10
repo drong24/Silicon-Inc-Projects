@@ -3,6 +3,29 @@
   color: black;
   margin: 0;
   padding: 0;
+  border: 1px solid red;
+}
+
+header {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  background-color: blue;
+}
+
+.logo-img {
+  width: 100px;
+  padding: 8px;
+  margin-right: 24px;
+}
+
+header > ul {
+  display: flex;
+  flex-grow: 1;
+}
+
+li {
+  list-style: none;
 }
 
 li:active {
