@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Routes, Route, Link} from 'react-router'
 import Header from './Header'
 import Home from './Home';
+import MovieDetails from './MovieDetails';
 import { TABS } from './constants';
 import './App.css'
 
@@ -15,8 +16,12 @@ function App() {
   }
   return (
     <div>
+      <Header activeTab={activeTab} onClick={handleTabClick}/>
+      <Link to="/">HOME</Link>
+      <Link to="/moviedetails">Movie Details</Link>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/moviedetails" element={<MovieDetails/>}/>
         <Route />
       </Routes>
     </div>
