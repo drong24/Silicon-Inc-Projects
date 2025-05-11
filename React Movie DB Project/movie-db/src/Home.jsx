@@ -23,7 +23,6 @@ export default function Home() {
     return (
         <div>
             {movies.map((movie) => {
-                console.log(movie);
                 return (
                     <MovieCard key={movie.id} movie={movie}/>  
                 );
