@@ -3,7 +3,6 @@
   color: black;
   margin: 0;
   padding: 0;
-  border: 1px solid red;
 }
 
 header {
@@ -30,4 +29,67 @@ li {
 
 li:active {
   color: red;
+}
+
+/* Home */
+.home {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+/* Movie List */
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 3rem;
+}
+
+/* Movie Card */
+
+.movie-card {
+  text-align: center;
+  box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.1);
+}
+
+.movie-card-img img {
+  width: 100%;
+}
+
+.movie-card-title {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+.movie-card-title:hover {
+  color: #90cea1;
+}
+
+.movie-card-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  align-items: center;
+}
+
+.movie-card-rating .icon {
+  font-size: 1.5rem;
+}
+
+.movie-card-rating {
+  display: flex;
+  align-items: center;
+}
+
+.movie-card-info .ion-md-heart-empty {
+  cursor: pointer;
+}
+.movie-card-info .ion-md-heart {
+  cursor: pointer;
+  color: red;
+}
+
+.movie-card-info .rating-icon {
+  color: #f5c518;
+  margin-right: 0.5rem;
+  cursor: default;
 }

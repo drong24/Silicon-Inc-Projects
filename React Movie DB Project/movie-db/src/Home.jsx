@@ -21,12 +21,14 @@ export default function Home() {
 
     console.log(movies);
     return (
-        <div>
-            {movies.map((movie) => {
-                return (
-                    <MovieCard key={movie.id} movie={movie}/>  
-                );
-        })}
+        <div className="home">
+            <div className="movie-list">
+                {movies.map((movie) => {
+                    return (
+                        <MovieCard key={movie.id} movie={movie}/>
+                    );
+                })}
+            </div>
         </div>
     );
 
