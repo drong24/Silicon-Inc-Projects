@@ -3,6 +3,7 @@ import { fetchMovieList } from "./api";
 import { CATAGORIES } from "./constants";
 import MovieCard from "./MovieCard";
 import Pagination from "./Pagination";
+import CategorySelector from "./CategorySelector";
 
 
 export default function Home() {
@@ -32,6 +33,11 @@ export default function Home() {
         }
     }
 
+    const handleCategoryChange = (value) => {
+        setCategory(value);
+        setCurrentPage(1);
+    };
+
     console.log(movies);
     return (
         <div className="home">
@@ -42,6 +48,11 @@ export default function Home() {
             onNext={onNext}
             >
             </Pagination>
+            <CategorySelector 
+            category={category} 
+            onCategoryChange={handleCategoryChange}>
+
+            </CategorySelector>
             <div className="movie-list">
                 {movies.map((movie) => {
                     return (
