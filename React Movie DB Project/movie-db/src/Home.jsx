@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import { fetchMovieList } from "./api";
 import { CATAGORIES } from "./constants";
 import MovieCard from "./MovieCard";
+import Pagination from "./Pagination";
 
 
 export default function Home() {
@@ -17,11 +18,30 @@ export default function Home() {
             setTotalPages(data.total_pages);
             setMovies(data.results);
         });
-    }, []);
+    }, [category, currentPage]);
+
+    const onPrev = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const onNext = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    }
 
     console.log(movies);
     return (
         <div className="home">
+            <Pagination 
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPrev={onPrev}
+            onNext={onNext}
+            >
+            </Pagination>
             <div className="movie-list">
                 {movies.map((movie) => {
                     return (

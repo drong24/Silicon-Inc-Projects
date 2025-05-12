@@ -1,15 +1,22 @@
+
+:root {
+  --header-bg: rgb(55, 68, 212);
+
+}
+
 * {
-  background-color: whitesmoke;
   color: black;
   margin: 0;
   padding: 0;
 }
 
+/* Header */
+
 header {
   width: 100vw;
   display: flex;
   align-items: center;
-  background-color: blue;
+  background-color: var(--header-bg);
 }
 
 .logo-img {
@@ -25,6 +32,7 @@ header > ul {
 
 li {
   list-style: none;
+  color: white;
 }
 
 li:active {
@@ -35,6 +43,7 @@ li:active {
 .home {
   padding-left: 40px;
   padding-right: 40px;
+  background-color: white;
 }
 
 /* Movie List */

@@ -1,7 +1,9 @@
 
 import React from "react";
+import { Routes, Route, Link} from 'react-router'
 import { TABS } from "./constants";
 import './App.css'
+
 
 
 export default function Header(props) {
@@ -9,7 +11,7 @@ export default function Header(props) {
     return (
         <header>
             <div className="logo-img">
-                <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="the movie db title logo" />
+                <img src="./public/logo.svg" alt="the movie db title logo" />
             </div>
             <ul>
                 <li active={props.activeTab === TABS.HOME ? TABS.HOME : undefined} onClick={() => props.onClick(TABS.HOME)}>
@@ -22,6 +24,9 @@ export default function Header(props) {
                     RATED
                 </li>
             </ul>
+            <div>
+                Login
+            </div>
         </header>
     );
 }
