@@ -5,6 +5,8 @@ import Home from './Home';
 import MovieDetails from './MovieDetails';
 import { TABS } from './constants';
 import './App.css'
+import Favorites from './Favorites';
+import Rated from './Rated';
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
       onClick={handleTabClick}/>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/rated" element={<Rated />} />
         <Route path="/moviedetails/:movieId" element={<MovieDetails/>}/>
         <Route />
       </Routes>

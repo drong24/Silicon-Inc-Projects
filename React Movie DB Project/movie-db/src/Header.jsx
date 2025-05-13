@@ -15,13 +15,13 @@ export default function Header(props) {
             </div>
             <ul className="tab_links">
                 <li active={props.activeTab === TABS.HOME ? TABS.HOME : undefined} onClick={() => props.onClick(TABS.HOME)}>
-                    HOME
+                    <Link to="/">HOME</Link>
                 </li>
                 <li active={props.activeTab === TABS.LIKED ? TABS.LIKED : undefined} onClick={() => props.onClick(TABS.LIKED)}>
-                    LIKED
+                    <Link to="/favorites">LIKED</Link>
                 </li>
                 <li active={props.activeTab === TABS.RATED ? TABS.RATED : undefined} onClick={() => props.onClick(TABS.RATED)}>
-                    RATED
+                    <Link to="/rated">RATED</Link>
                 </li>
             </ul>
             <div className="login_link">

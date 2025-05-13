@@ -68,7 +68,7 @@ export default function MovieDetails() {
                         movie.production_companies.map((company) => {
                             return (
                             <li className="company_li" key={company.id}>
-                                <img src={`https://image.tmdb.org/t/p/w500/${company.logo_path}`} alt="company img" />
+                                <img src={`https://image.tmdb.org/t/p/w500/${company.logo_path}`} alt={company.name} />
                             </li>
                             );
                         })
