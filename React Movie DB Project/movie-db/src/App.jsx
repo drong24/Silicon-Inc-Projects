@@ -10,15 +10,13 @@ function App() {
 
   const [activeTab, setActiveTab] = useState(TABS.HOME);
   const handleTabClick = (tab) => {
-    console.log(tab);
     setActiveTab(tab);
-    console.log(activeTab);
   }
   return (
     <div>
-      <Header activeTab={activeTab} onClick={handleTabClick}/>
-      <Link to="/">HOME</Link>
-      <Link to="/moviedetails">Movie Details</Link>
+      <Header 
+      activeTab={activeTab} 
+      onClick={handleTabClick}/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/moviedetails/:movieId" element={<MovieDetails/>}/>

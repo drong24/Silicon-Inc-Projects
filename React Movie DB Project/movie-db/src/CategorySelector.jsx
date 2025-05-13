@@ -8,14 +8,16 @@ export default function CategorySelector(props) {
     }
 
     return (
-        <select value={props.category} onChange={handleChange}>
-            {
-                Object.values(CATAGORIES).map((category) => {
-                    return (
-                        <option value={category.value} key={category.value}>{category.label}</option>
-                    );
-                })
-            }
-        </select>
+        <div className="selector">
+            <select value={props.category} onChange={handleChange}>
+                {
+                    Object.values(CATAGORIES).map((category) => {
+                        return (
+                            <option value={category.value} key={category.value}>{category.label}</option>
+                        );
+                    })
+                }
+            </select>
+        </div>
     );
 }

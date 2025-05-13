@@ -13,7 +13,7 @@ export default function Header(props) {
             <div className="logo-img">
                 <img src="https://wizardly-carson-f4d936.netlify.app/static/media/logo.de1a664e.svg" alt="the movie db title logo" />
             </div>
-            <ul>
+            <ul className="tab_links">
                 <li active={props.activeTab === TABS.HOME ? TABS.HOME : undefined} onClick={() => props.onClick(TABS.HOME)}>
                     HOME
                 </li>
@@ -24,7 +24,7 @@ export default function Header(props) {
                     RATED
                 </li>
             </ul>
-            <div>
+            <div className="login_link">
                 Login
             </div>
         </header>

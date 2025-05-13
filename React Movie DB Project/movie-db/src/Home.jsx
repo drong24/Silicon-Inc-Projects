@@ -41,18 +41,20 @@ export default function Home() {
     console.log(movies);
     return (
         <div className="home">
-            <Pagination 
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPrev={onPrev}
-            onNext={onNext}
-            >
-            </Pagination>
-            <CategorySelector 
-            category={category} 
-            onCategoryChange={handleCategoryChange}>
-
-            </CategorySelector>
+            <div className="home_nav_bar">
+                <Pagination
+                className="pagination"
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPrev={onPrev}
+                onNext={onNext}
+                >
+                </Pagination>
+                <CategorySelector
+                category={category}
+                onCategoryChange={handleCategoryChange}>
+                </CategorySelector>
+            </div>
             <div className="movie-list">
                 {movies.map((movie) => {
                     return (
