@@ -16,3 +16,17 @@ export const fetchMovieList = (category, page) => {
         return data;
     });
 };
+
+export const fetchMovieDetails = (movieId) => {
+    return fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`
+    )
+    .then((resp) => {
+        if (resp.ok) {
+            return resp.json();
+        }
+    })
+    .then((data) => {
+        return data;
+    })
+} 

@@ -11,7 +11,7 @@ export default function Header(props) {
     return (
         <header>
             <div className="logo-img">
-                <img src="./public/logo.svg" alt="the movie db title logo" />
+                <img src="https://wizardly-carson-f4d936.netlify.app/static/media/logo.de1a664e.svg" alt="the movie db title logo" />
             </div>
             <ul>
                 <li active={props.activeTab === TABS.HOME ? TABS.HOME : undefined} onClick={() => props.onClick(TABS.HOME)}>
