@@ -143,3 +143,69 @@ header > ul {
   margin-right: 0.5rem;
   cursor: default;
 }
+
+
+/* Movie Details */
+
+.details_container > h3 {
+  margin-top: 12px;
+  margin-bottom: 5px;
+}
+
+.movie_details {
+  display: flex;
+  padding: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.movie_details_img {
+  display: flex;
+  margin-right: 32px;
+}
+
+.movie_details_img > img {
+  width: 400px;
+  flex-basis: 50%;
+}
+
+.movie_genre_list {
+  display: flex;
+}
+
+.genre_li {
+  width:fit-content;
+  padding: 5px 15px 5px 15px;
+  border-radius: 15px;
+  background-color: rgb(1, 180, 228);
+  color: white;
+  list-style: none;
+  margin-right: 10px;
+}
+
+.movie_rating_avg {
+  display: flex;
+}
+.movie_rating_avg > i {
+  margin-right: 10px;
+}
+.movie_rating_select {
+  padding: 5px;
+  font-size: 1rem;
+  margin-right: 20px;
+}
+
+.movie_company_list {
+  display: flex;
+}
+
+.company_li {
+  list-style: none;
+  margin-right: 15px;
+}
+
+.company_li > img {
+  width: 50px;
+  height: 30px;
+  aspect-ratio: auto 50 / 30;
+}
