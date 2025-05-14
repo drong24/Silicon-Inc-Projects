@@ -1,12 +1,28 @@
 
 import React from "react";
+import { useState, userEffect } from "react";
 import { Routes, Route, Link} from 'react-router'
 import { TABS } from "./constants";
 import './App.css'
-
-
+import { useEffect } from "react";
 
 export default function Header(props) {
+
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    const handleLogout = () => {
+        localStorage.removeItem('user');
+        setUser(null);
+    }
+    
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+        console.log(JSON.parse(storedUser));
+    },[loading]);
 
     return (
         <header>
@@ -24,9 +40,17 @@ export default function Header(props) {
                     <Link to="/rated">RATED</Link>
                 </li>
             </ul>
-            <div className="login_link">
-                <Link to="/login">Login</Link>
-            </div>
+            {user ? 
+            (
+                <div className="logout_link">
+                    <button onClick={handleLogout}>{user.username}</button>
+                </div>
+            ) : 
+            (
+                <div className="login_link">
+                    <Link to="/login">Login</Link>
+                </div>
+            )}
         </header>
     );
 }

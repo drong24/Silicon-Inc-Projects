@@ -1,9 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
 import axios from 'axios';
 
 const API_KEY = "124471754942997e76b157aefcfb80c2";
-const BASE_URL = "https://api.themoviedb.org/3/movie/";
 const username = "dzrong199517";
 const password = "Samrong1";
 
@@ -59,7 +57,7 @@ export const login = async () => {
             sessionId: session_id,
             request_token: request_token
         };
-        //localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('user', JSON.stringify(userData));
         console.log(userData);
     }
     catch (e) {

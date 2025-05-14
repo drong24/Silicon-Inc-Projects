@@ -38,7 +38,6 @@ export default function Home() {
         setCurrentPage(1);
     };
 
-    console.log(movies);
     return (
         <div className="home">
             <div className="home_nav_bar">

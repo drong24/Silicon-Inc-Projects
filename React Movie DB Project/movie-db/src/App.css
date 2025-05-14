@@ -51,6 +51,16 @@ header > ul {
   color: white;
 }
 
+.logout_link {
+  background-color: var(--header-bg);
+}
+
+.logout_link > button {
+  background-color: var(--header-bg);
+  color: white;
+  border: none;
+}
+
 .tab_links > li {
   list-style: none;
   margin-right: 30px;
