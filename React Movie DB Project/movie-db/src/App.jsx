@@ -7,6 +7,7 @@ import { TABS } from './constants';
 import './App.css'
 import Favorites from './Favorites';
 import Rated from './Rated';
+import Login from './Login';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/rated" element={<Rated />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/moviedetails/:movieId" element={<MovieDetails/>}/>
         <Route />
       </Routes>

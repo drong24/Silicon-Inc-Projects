@@ -25,7 +25,7 @@ export default function Header(props) {
                 </li>
             </ul>
             <div className="login_link">
-                Login
+                <Link to="/login">Login</Link>
             </div>
         </header>
     );
