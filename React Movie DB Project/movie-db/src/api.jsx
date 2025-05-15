@@ -1,6 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
+import { MoviesContext } from './Context/MoviesContext';
 
 
 const API_KEY = "124471754942997e76b157aefcfb80c2";
@@ -14,19 +15,36 @@ const client = axios.create({
       }
 });
 
-export const fetchMovieList = (category, page) => {
-    return fetch(
-        `https://api.themoviedb.org/3/movie/${category}?&page=${page}&api_key=${API_KEY}`
-    )
-    .then((resp) => {
-        if (resp.ok) {
-            return resp.json();
-        }
-    })
-    .then((data) => {
-        console.log(data);
-        return data;
-    });
+
+export const fetchMovieList = (category, page, moviesMap, setMoviesMap) => {
+
+    if (moviesMap[category] && moviesMap[category][page]) {
+        console.log(moviesMap[category][page]);
+        return Promise.resolve(moviesMap[category][page]);
+    } else {
+        console.log("Fetching Movies...");
+        return fetch(
+            `https://api.themoviedb.org/3/movie/${category}?&page=${page}&api_key=${API_KEY}`
+        )
+        .then((resp) => {
+            if (resp.ok) {
+                return resp.json();
+            }
+        })
+        .then((data) => {
+            console.log(data);
+            setMoviesMap((map) => {
+                return {
+                  ...map,
+                  [category]: {
+                    ...map[category],
+                    [page]: data
+                  }
+                };
+              })
+            return data;
+        });
+    }
 };
 
 export const fetchMovieDetails = (movieId) => {
@@ -95,7 +113,6 @@ export const fetchFavorites = async () => {
 
     try {
         const { data } = await client.get(`/account/${account_id}/favorite/movies`);
-        console.log(data);
         return data;
     }
     catch (e) {

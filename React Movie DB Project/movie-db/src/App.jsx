@@ -11,10 +11,12 @@ import Login from './Login';
 import { UserContext } from './Context/UserContext';
 import { FavoritesContext } from './Context/FavoritesContext';
 import { fetchFavorites } from './api';
+import { MoviesContext } from './Context/MoviesContext';
 
 
 function App() {
 
+  const [moviesMap, setMoviesMap] = useState({});
   const [favoritesMap, setFavoritestMap] = useState([]);
   const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem('user');
@@ -30,11 +32,13 @@ function App() {
       fetchFavorites().then((data) => {
           setFavoritestMap(data.results);
       });
+      
       console.log("at app.jsx useEffect");
   }
   },[]);
 
   return (
+    <MoviesContext.Provider value={{ moviesMap, setMoviesMap }}>
     <FavoritesContext.Provider value={{ favoritesMap, setFavoritestMap }}>
     <UserContext.Provider value={{ user, setUser }}>
       <Header 
@@ -50,6 +54,7 @@ function App() {
       </Routes>
     </UserContext.Provider>
     </FavoritesContext.Provider>
+    </MoviesContext.Provider>
   );
 }
 

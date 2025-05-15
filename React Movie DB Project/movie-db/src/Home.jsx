@@ -1,13 +1,15 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { fetchMovieList } from "./api";
 import { CATAGORIES } from "./constants";
 import MovieCard from "./MovieCard";
 import Pagination from "./Pagination";
 import CategorySelector from "./CategorySelector";
+import { MoviesContext } from "./Context/MoviesContext";
 
 
 export default function Home() {
 
+    const { moviesMap, setMoviesMap } = useContext(MoviesContext);
     const [movies, setMovies] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
@@ -15,11 +17,11 @@ export default function Home() {
 
 
     useEffect(() => {
-        fetchMovieList(category, currentPage).then((data) => {
+        fetchMovieList(category, currentPage, moviesMap, setMoviesMap).then((data) => {
             setTotalPages(data.total_pages);
             setMovies(data.results);
         });
-    }, [category, currentPage]);
+    }, [moviesMap, currentPage, category]);
 
     const onPrev = () => {
         if (currentPage > 1) {
@@ -54,13 +56,19 @@ export default function Home() {
                 onCategoryChange={handleCategoryChange}>
                 </CategorySelector>
             </div>
-            <div className="movie-list">
-                {movies.map((movie) => {
-                    return (
-                        <MovieCard key={movie.id} movie={movie}/>
-                    );
-                })}
-            </div>
+            {
+                moviesMap ? 
+                (
+                    <div className="movie-list">
+                    {movies.map((movie) => {
+                        return (
+                            <MovieCard key={movie.id} movie={movie}/>
+                        );
+                    })}
+                    </div>
+                ) :
+                (<p>Loading...</p>)
+            }
         </div>
     );
 
