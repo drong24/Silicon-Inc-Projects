@@ -12,9 +12,10 @@ export default function MovieCard(props) {
 
     const handleClick = () => {
         if (user) {
-            setFavorite(!favorite);
+            const newFavorite = !favorite
+            setFavorite(newFavorite);
             console.log(props.movie.id);
-            toggleFavorite({movieId:props.movie.id, isFavorite:favorite});
+            toggleFavorite({movieId:props.movie.id, isFavorite:newFavorite});
         }
     }
 

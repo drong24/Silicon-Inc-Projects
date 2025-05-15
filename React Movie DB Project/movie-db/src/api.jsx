@@ -24,6 +24,7 @@ export const fetchMovieList = (category, page) => {
         }
     })
     .then((data) => {
+        console.log(data);
         return data;
     });
 };
@@ -70,7 +71,7 @@ export const login = async (values) => {
     }
 }
 
-export const toggleFavorite = (params) => {
+export const toggleFavorite = async (params) => {
     const user = localStorage.getItem("user");
     const media_type = "movie";
     const media_id = params.movieId;
@@ -78,16 +79,26 @@ export const toggleFavorite = (params) => {
     const account_id = JSON.parse(user).accountId;
 
     try {
-        client.post(`/account/${account_id}/favorite`, {media_type, media_id, favorite});
+        const response = await client.post(`/account/${account_id}/favorite`, {media_type, media_id, favorite});
+        console.log(response);
     }
     catch(e) {
         console.log("toggleFavorite error: " + e);
     }
-    console.log("Success! " + account_id + " " + media_id);
+    console.log("Success! " + account_id + " " + media_id + " " + favorite);
     
 }
 
-export const fetchFavorites = () => {
+export const fetchFavorites = async () => {
     const user = localStorage.getItem("user");
     const account_id = JSON.parse(user).accountId;
+
+    try {
+        const { data } = await client.get(`/account/${account_id}/favorite/movies`);
+        console.log(data);
+        return data;
+    }
+    catch (e) {
+        console.log('fetchFavorites Error: ' + e);
+    }
 }

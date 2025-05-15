@@ -274,3 +274,15 @@ header > ul {
 .input-feedback {
   color: red;
 }
+
+/* Favorites */
+.favorites_container {
+  padding: 40px;
+}
+
+.favorites_container > h2 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: 400;
+}
