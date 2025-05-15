@@ -1,6 +1,6 @@
 import React from "react";
 import { login } from "./api";
-import { useUser } from "./App";
+import { useUser } from "./Context/UserContext";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useState } from "react";
@@ -11,7 +11,6 @@ import { CircularProgress } from '@mui/material';
 export default function Login() {
 
     const navigate = useNavigate();
-    const { user } = useUser();
     const { setUser } = useUser();
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);

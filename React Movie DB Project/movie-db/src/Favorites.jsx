@@ -1,30 +1,21 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { fetchFavorites } from "./api";
-import { useUser } from "./App";
+import { useUser } from "./Context/UserContext";
 import MovieCard from "./MovieCard";
+import { FavoritesContext } from './Context/FavoritesContext';
 
 
 export default function Favorites() {
 
     const user = useUser();
-    const [favorites, setFavorites] = useState([]);
-
-    useEffect(() => {
-        if (user) {
-            fetchFavorites().then((data) => {
-                setFavorites(data.results);
-            });
-        }
-        console.log(favorites);
-    },[]);
+    const { favoritesMap } = useContext(FavoritesContext);
     
-
     return (
         <div className="favorites_container">
             <h2>Favorite Movies</h2>
             <div className="movie-list">
-                {favorites.map((movie) => {
+                {favoritesMap.map((movie) => {
                     return (
                         <MovieCard key={movie.id} movie={movie}/>
                     );

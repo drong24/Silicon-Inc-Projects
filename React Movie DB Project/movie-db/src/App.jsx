@@ -1,5 +1,5 @@
-import { useState, createContext, useContext } from 'react'
-import { Routes, Route, Link} from 'react-router'
+import { useState, useEffect, createContext, useContext } from 'react'
+import { Routes, Route } from 'react-router'
 import Header from './Header'
 import Home from './Home';
 import MovieDetails from './MovieDetails';
@@ -8,13 +8,14 @@ import './App.css'
 import Favorites from './Favorites';
 import Rated from './Rated';
 import Login from './Login';
-
-const UserContext = createContext();
-export const useUser = () => useContext(UserContext);
+import { UserContext } from './Context/UserContext';
+import { FavoritesContext } from './Context/FavoritesContext';
+import { fetchFavorites } from './api';
 
 
 function App() {
 
+  const [favoritesMap, setFavoritestMap] = useState([]);
   const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem('user');
     return storedUser ? JSON.parse(storedUser) : null;
@@ -23,8 +24,18 @@ function App() {
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   }
-  return (
 
+  useEffect(() => {
+    if (user) {
+      fetchFavorites().then((data) => {
+          setFavoritestMap(data.results);
+      });
+      console.log("at app.jsx useEffect");
+  }
+  },[]);
+
+  return (
+    <FavoritesContext.Provider value={{ favoritesMap, setFavoritestMap }}>
     <UserContext.Provider value={{ user, setUser }}>
       <Header 
       activeTab={activeTab} 
@@ -38,6 +49,7 @@ function App() {
         <Route />
       </Routes>
     </UserContext.Provider>
+    </FavoritesContext.Provider>
   );
 }
 

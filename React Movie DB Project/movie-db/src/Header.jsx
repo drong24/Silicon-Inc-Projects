@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Routes, Route, Link} from 'react-router'
 import { TABS } from "./constants";
-import { useUser } from "./App";
+import { useUser } from "./Context/UserContext";
 
 
 export default function Header(props) {

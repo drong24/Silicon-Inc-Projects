@@ -1,14 +1,23 @@
 
 import React from "react";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router";
 import { toggleFavorite } from "./api";
+import { FavoritesContext } from "./Context/FavoritesContext";
+import { useUser } from "./Context/UserContext";
 
 export default function MovieCard(props) {
 
-    const [favorite, setFavorite] = useState(false);
-    const user = localStorage.getItem("user");
-
+    const { user } = useUser();
+    const { favoritesMap, setFavoritestMap } = useContext(FavoritesContext);
+    const [favorite, setFavorite] = useState();
+    useEffect(() => {
+        if (favoritesMap) {
+            const found = favoritesMap.find((obj) => obj.id === props.movie.id);
+            setFavorite(found);
+        }
+    },[favoritesMap]);
 
     const handleClick = () => {
         if (user) {
@@ -16,6 +25,14 @@ export default function MovieCard(props) {
             setFavorite(newFavorite);
             console.log(props.movie.id);
             toggleFavorite({movieId:props.movie.id, isFavorite:newFavorite});
+            if (newFavorite) {
+                setFavoritestMap([...favoritesMap, props.movie]);
+            } else {
+                const newFavoritesMap = favoritesMap.filter((movie) => {
+                    return movie.id !== props.movie.id;
+                });
+                setFavoritestMap(newFavoritesMap);
+            }
         }
     }
 
