@@ -1,9 +1,10 @@
 import React from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 const API_KEY = "124471754942997e76b157aefcfb80c2";
-const username = "dzrong199517";
-const password = "Samrong1";
+ //const username = "dzrong199517";
+ //const password = "Samrong1";
 
 
 const client = axios.create({
@@ -42,7 +43,11 @@ export const fetchMovieDetails = (movieId) => {
     })
 } 
 
-export const login = async () => {
+export const login = async (values) => {
+
+    const username = values.username;
+    const password = values.password;
+    console.log("At login. Values: " + username + " / " + password);
 
     try {
         const { data: { request_token } } = await client.get(`/authentication/token/new`);
@@ -58,9 +63,10 @@ export const login = async () => {
             request_token: request_token
         };
         localStorage.setItem('user', JSON.stringify(userData));
-        console.log(userData);
+        console.log(userData);        
     }
     catch (e) {
-        console.log(e);
+        console.log("Error at api.jsx");
+        throw(e);
     }
 }

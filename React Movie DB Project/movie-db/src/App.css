@@ -265,3 +265,7 @@ header > ul {
   cursor: pointer;
   box-shadow: 5px black;
 }
+
+.input-feedback {
+  color: red;
+}
