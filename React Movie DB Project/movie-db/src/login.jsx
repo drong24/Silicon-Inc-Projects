@@ -17,7 +17,7 @@ export default function Login() {
 
     return (
         
-        <div>
+        <div className="login_page">
             <h2>Login</h2>
             <div className="error-message input-feedback">
                 {error ? "Invalid username or password." : ""}
@@ -55,10 +55,10 @@ export default function Login() {
                 handleReset,
               } = props;
               return (
-                <form onSubmit={handleSubmit}>
+                <form className="login_form" onSubmit={handleSubmit}>
                   <input
                     id="username"
-                    placeholder="Enter your username"
+                    placeholder="Username"
                     type="text"
                     value={values.username}
                     onChange={handleChange}
@@ -75,7 +75,7 @@ export default function Login() {
                   <br />
                   <input
                     id="password"
-                    placeholder="Enter your password"
+                    placeholder="Password"
                     type="password"
                     value={values.password}
                     onChange={handleChange}
@@ -86,11 +86,11 @@ export default function Login() {
                         : "text-input"
                     }
                   />
-                  <br />
                   {errors.password && touched.password && (
                     <div className="input-feedback">{errors.password}</div>
                   )}
-                  <button type="submit" disabled={isSubmitting}>
+                  <br />
+                  <button className="submit_button" type="submit" disabled={isSubmitting}>
                     Submit
                   </button>
                   </form>

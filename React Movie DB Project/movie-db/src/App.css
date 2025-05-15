@@ -230,11 +230,43 @@ header > ul {
   aspect-ratio: auto 50 / 30;
 }
 
+/* Login */
+
 .login_page {
   width: 500px;
   margin: auto;
   padding-top: 40px;
 }
+
+.login_page > h2 {
+  margin-bottom: 42px;
+  text-align: center;
+}
+
+.login_form {
+  display: flex;
+  flex-direction: column;
+}
+
+#username, #password {
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 1.2rem;
+  padding: 5px;
+  
+}
+
+.submit_button {
+  background-color: var(--header-bg);
+  color: white;
+}
+
+.submit_button:hover {
+  cursor: pointer;
+  background-color: rgb(55, 71, 164);
+}
+
+/*
 
 .login_page > form {
   display: flex;
@@ -264,7 +296,7 @@ header > ul {
 .submin_button:hover {
   cursor: pointer;
   box-shadow: 5px black;
-}
+} */
 
 .input-feedback {
   color: red;
