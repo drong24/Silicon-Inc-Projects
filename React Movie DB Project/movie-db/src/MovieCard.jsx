@@ -47,7 +47,7 @@ export default function MovieCard(props) {
             <div className="movie-card-info">
                 <div className="movie-card-rating">
                     <i className="ion-md-star rating-icon"></i>
-                    <span>{props.movie.vote_average}</span>
+                    <span>{props.movie.vote_average}</span> {props.movie.rating ? (<span>/{props.movie.rating}</span>) : (<></>)}
                 </div>
                 <div onClick={handleClick}>
                     <i
