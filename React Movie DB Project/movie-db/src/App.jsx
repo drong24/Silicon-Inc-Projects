@@ -15,7 +15,10 @@ export const useUser = () => useContext(UserContext);
 
 function App() {
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
   const [activeTab, setActiveTab] = useState(TABS.HOME);
   const handleTabClick = (tab) => {
     setActiveTab(tab);

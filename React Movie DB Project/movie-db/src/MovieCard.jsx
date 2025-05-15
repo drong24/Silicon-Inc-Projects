@@ -1,9 +1,23 @@
 
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router";
-
+import { toggleFavorite } from "./api";
 
 export default function MovieCard(props) {
+
+    const [favorite, setFavorite] = useState(false);
+    const user = localStorage.getItem("user");
+
+
+    const handleClick = () => {
+        if (user) {
+            setFavorite(!favorite);
+            console.log(props.movie.id);
+            toggleFavorite({movieId:props.movie.id, isFavorite:favorite});
+        }
+    }
+
     return (
         <div className="movie-card">
             <div className="movie-card-img">
@@ -17,7 +31,13 @@ export default function MovieCard(props) {
                     <i className="ion-md-star rating-icon"></i>
                     <span>{props.movie.vote_average}</span>
                 </div>
-                <i className="ion-md-heart-empty"></i>
+                <div onClick={handleClick}>
+                    <i
+                    className={`like-icon icon 
+                    ${favorite ? "ion-md-heart" : "ion-md-heart-empty"}`}
+                    >
+                    </i>
+                </div>
             </div>
         </div>
     );

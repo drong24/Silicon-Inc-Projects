@@ -35,7 +35,6 @@ export default function Login() {
                     console.log("Login Failed: " + e);
                     setError(true);
                 }
-                console.log(user);
             }}
             validationSchema={Yup.object().shape({
               username: Yup.string().required("Username Required"),

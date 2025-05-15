@@ -4,8 +4,6 @@ import axios from 'axios';
 
 
 const API_KEY = "124471754942997e76b157aefcfb80c2";
- //const username = "dzrong199517";
- //const password = "Samrong1";
 
 
 const client = axios.create({
@@ -70,4 +68,26 @@ export const login = async (values) => {
         console.log("Error at api.jsx");
         throw(e);
     }
+}
+
+export const toggleFavorite = (params) => {
+    const user = localStorage.getItem("user");
+    const media_type = "movie";
+    const media_id = params.movieId;
+    const favorite = params.isFavorite;
+    const account_id = JSON.parse(user).accountId;
+
+    try {
+        client.post(`/account/${account_id}/favorite`, {media_type, media_id, favorite});
+    }
+    catch(e) {
+        console.log("toggleFavorite error: " + e);
+    }
+    console.log("Success! " + account_id + " " + media_id);
+    
+}
+
+export const fetchFavorites = () => {
+    const user = localStorage.getItem("user");
+    const account_id = JSON.parse(user).accountId;
 }
