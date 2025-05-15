@@ -10,14 +10,16 @@ import Rated from './Rated';
 import Login from './Login';
 import { UserContext } from './Context/UserContext';
 import { FavoritesContext } from './Context/FavoritesContext';
-import { fetchFavorites } from './api';
+import { fetchFavorites, fetchRated } from './api';
 import { MoviesContext } from './Context/MoviesContext';
+import { RatedContext } from './Context/RatedContext';
 
 
 function App() {
 
   const [moviesMap, setMoviesMap] = useState({});
   const [favoritesMap, setFavoritestMap] = useState([]);
+  const [ratedMap, setRatedMap] = useState([]);
   const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem('user');
     return storedUser ? JSON.parse(storedUser) : null;
@@ -32,7 +34,9 @@ function App() {
       fetchFavorites().then((data) => {
           setFavoritestMap(data.results);
       });
-      
+      fetchRated().then((data) => {
+        setRatedMap(data.results);
+      });
       console.log("at app.jsx useEffect");
   }
   },[]);
@@ -40,6 +44,7 @@ function App() {
   return (
     <MoviesContext.Provider value={{ moviesMap, setMoviesMap }}>
     <FavoritesContext.Provider value={{ favoritesMap, setFavoritestMap }}>
+    <RatedContext.Provider value={{ratedMap, setRatedMap}}>
     <UserContext.Provider value={{ user, setUser }}>
       <Header 
       activeTab={activeTab} 
@@ -53,6 +58,7 @@ function App() {
         <Route />
       </Routes>
     </UserContext.Provider>
+    </RatedContext.Provider>
     </FavoritesContext.Provider>
     </MoviesContext.Provider>
   );

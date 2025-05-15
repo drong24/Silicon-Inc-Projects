@@ -285,3 +285,15 @@ header > ul {
   margin-bottom: 15px;
   font-weight: 400;
 }
+
+/* Rated */
+.rated_container {
+  padding: 40px;
+}
+
+.rated_container > h2 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: 400;
+}

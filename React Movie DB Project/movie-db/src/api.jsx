@@ -119,3 +119,16 @@ export const fetchFavorites = async () => {
         console.log('fetchFavorites Error: ' + e);
     }
 }
+
+export const fetchRated = async() => {
+    const user = localStorage.getItem("user");
+    const account_id = JSON.parse(user).accountId;
+
+    try {
+        const { data } = await client.get(`/account/${account_id}/rated/movies`);
+        return data;
+    }
+    catch (e) {
+        console.log('fetchFavorites Error: ' + e);
+    }
+}
