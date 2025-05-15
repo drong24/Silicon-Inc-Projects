@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useState } from "react";
 import { useNavigate } from 'react-router';
+import { CircularProgress } from '@mui/material';
 
 
 export default function Login() {
@@ -13,6 +14,7 @@ export default function Login() {
     const { user } = useUser();
     const { setUser } = useUser();
     const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
 
 
     return (
@@ -26,9 +28,11 @@ export default function Login() {
             initialValues={{ username: "", password: "" }}
             onSubmit={async (values) => {
                 try {
+                    setLoading(true);
                     await new Promise((resolve) => setTimeout(resolve, 500));
                     console.log(values);
                     setUser(await login(values));
+                    setLoading(false);
                     navigate("/");
                 }
                 catch(e) {
@@ -46,12 +50,10 @@ export default function Login() {
                 values,
                 touched,
                 errors,
-                dirty,
                 isSubmitting,
                 handleChange,
                 handleBlur,
                 handleSubmit,
-                handleReset,
               } = props;
               return (
                 <form className="login_form" onSubmit={handleSubmit}>
@@ -89,9 +91,15 @@ export default function Login() {
                     <div className="input-feedback">{errors.password}</div>
                   )}
                   <br />
-                  <button className="submit_button" type="submit" disabled={isSubmitting}>
-                    Submit
-                  </button>
+                  {
+                  loading ? 
+                    <button className="submit_button" type="submit" disabled>
+                      <CircularProgress/>
+                    </button> : 
+                    <button className="submit_button" type="submit" disabled={isSubmitting}>
+                      Submit
+                    </button>
+                  }
                   </form>
               );
             }}
