@@ -9,7 +9,9 @@ import Favorites from './Favorites';
 import Rated from './Rated';
 import Login from './Login';
 
-export const UserContext = createContext();
+const UserContext = createContext();
+export const useUser = () => useContext(UserContext);
+
 
 function App() {
 
@@ -20,7 +22,7 @@ function App() {
   }
   return (
 
-    <UserContext.Provider value={{user, setUser}}>
+    <UserContext.Provider value={{ user, setUser }}>
       <Header 
       activeTab={activeTab} 
       onClick={handleTabClick}/>
@@ -37,4 +39,3 @@ function App() {
 }
 
 export default App
-export const useUser = () => useContext(UserContext);

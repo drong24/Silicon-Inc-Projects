@@ -10,21 +10,10 @@ import { useNavigate } from 'react-router';
 export default function Login() {
 
     const navigate = useNavigate();
+    const { user } = useUser();
     const { setUser } = useUser();
     const [error, setError] = useState(false);
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState(); 
 
-    const validationSchema = Yup.object({
-        email: Yup.string().required("Required"),
-        password: Yup.string().required("Required"),
-    });
-
-    const handleSubmit = async (e, values) => {
-        
-        setUser(login(values));
-        //window.location.reload();
-    }
 
     return (
         
@@ -46,6 +35,7 @@ export default function Login() {
                     console.log("Login Failed: " + e);
                     setError(true);
                 }
+                console.log(user);
             }}
             validationSchema={Yup.object().shape({
               username: Yup.string().required("Username Required"),

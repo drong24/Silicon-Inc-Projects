@@ -1,15 +1,15 @@
 
 import React from "react";
-import { useState, userEffect } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route, Link} from 'react-router'
 import { TABS } from "./constants";
-import './App.css'
-import { useEffect } from "react";
+import { useUser } from "./App";
+
 
 export default function Header(props) {
 
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const { user } = useUser();
+    const { setUser } = useUser();
 
     const handleLogout = () => {
         localStorage.removeItem('user');
@@ -17,12 +17,8 @@ export default function Header(props) {
     }
     
     useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        }
-        console.log(JSON.parse(storedUser));
-    },[loading]);
+        console.log("Header: " + user);
+    },[user]);
 
     return (
         <header>
