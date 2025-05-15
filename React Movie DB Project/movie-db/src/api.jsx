@@ -120,6 +120,21 @@ export const fetchFavorites = async () => {
     }
 }
 
+export const rateMovie = async(movie_id, value) => {
+    const user = localStorage.getItem("user");
+    if (!user) {
+        console.log("Not logged in.");
+        return null;
+    }
+
+    try {
+        await client.post(`/movie/${movie_id}/rating`, {value})
+    }
+    catch (e) {
+        console.log("rateMovies Error: " + e);
+    }
+}
+
 export const fetchRated = async() => {
     const user = localStorage.getItem("user");
     const account_id = JSON.parse(user).accountId;

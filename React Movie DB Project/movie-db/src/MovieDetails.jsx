@@ -1,19 +1,42 @@
-import { useState, useEffect } from "react";
-import { fetchMovieDetails } from "./api";
+import { useState, useEffect, useContext } from "react";
+import { fetchMovieDetails, rateMovie } from "./api";
 import { useParams, Link } from "react-router";
+import { RatedContext } from "./Context/RatedContext";
 
 
 export default function MovieDetails() {
 
+    const { ratedMap, setRatedMap } = useContext(RatedContext);
+    const [rated, setRated] = useState();
     const [movie, setMovie] = useState(null);
+    const [rateValue, setRateValue] = useState("1");
     const params = useParams();
 
     useEffect(() => {
         fetchMovieDetails(params.movieId).then((data) => {
-            console.log(data);
             setMovie(data);
+            const found = ratedMap.find((movie) => {
+                return movie.id === data.id;
+            })
+            if (found) {
+                console.log(found.rating);
+                setRated(found.rating);
+            }
         });
-    },[])
+    },[ratedMap])
+
+    const handleRate = () => {
+        rateMovie(movie.id, rateValue).then(() => {
+            const found = ratedMap.find((m) => {
+                return m.id === movie.id;
+            })
+            if (!found) {
+                setRatedMap([ ...ratedMap, movie ]);
+            }
+            setRated(rateValue);
+        });
+        console.log(ratedMap);
+    };
 
     if (!movie) {
         return null;
@@ -48,7 +71,10 @@ export default function MovieDetails() {
                 </div>
                 <h3>Your Rating</h3>
                 <div>
-                    <select name="rating" className="movie_rating_select">
+                    {rated ? rated : "Not Yet"}
+                </div>
+                <div>
+                    <select name="rating" className="movie_rating_select" value={rateValue} onChange={e => setRateValue(e.target.value)}>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -60,7 +86,7 @@ export default function MovieDetails() {
                         <option value="9">9</option>
                         <option value="10">10</option>
                     </select>
-                    <button>RATE IT!</button>
+                    <button onClick={handleRate}>RATE IT!</button>
                 </div>
                 <h3>Production Companies</h3>
                 <ul className="movie_company_list">
