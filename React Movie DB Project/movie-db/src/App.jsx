@@ -18,7 +18,7 @@ import { RatedContext } from './Context/RatedContext';
 function App() {
 
   const [moviesMap, setMoviesMap] = useState({});
-  const [favoritesMap, setFavoritestMap] = useState([]);
+  const [favoritesMap, setFavoritesMap] = useState([]);
   const [ratedMap, setRatedMap] = useState([]);
   const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem('user');
@@ -32,7 +32,7 @@ function App() {
   useEffect(() => {
     if (user) {
       fetchFavorites().then((data) => {
-          setFavoritestMap(data.results);
+          setFavoritesMap(data.results);
       });
       fetchRated().then((data) => {
         setRatedMap(data.results);
@@ -43,7 +43,7 @@ function App() {
 
   return (
     <MoviesContext.Provider value={{ moviesMap, setMoviesMap }}>
-    <FavoritesContext.Provider value={{ favoritesMap, setFavoritestMap }}>
+    <FavoritesContext.Provider value={{ favoritesMap, setFavoritesMap }}>
     <RatedContext.Provider value={{ratedMap, setRatedMap}}>
     <UserContext.Provider value={{ user, setUser }}>
       <Header 

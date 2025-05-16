@@ -10,7 +10,7 @@ export default function Favorites() {
 
     const user = useUser();
     const { favoritesMap } = useContext(FavoritesContext);
-    
+    console.log(favoritesMap);
     return (
         <div className="favorites_container">
             <h2>Favorite Movies</h2>

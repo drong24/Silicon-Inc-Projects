@@ -33,15 +33,11 @@ export default function MovieDetails() {
             })
             console.log(foundMovie);
             if (!foundMovie) {
-                console.log(movie);
-                console.log(rateValue);
                 const updatedMovie = { ...movie, rating: rateValue };
-                console.log(updatedMovie);
                 setRatedMap([ ...ratedMap, updatedMovie ]);
             }
             else {
                 console.log("exists!");
-                console.log(rateValue);
                 const updatedMovie = { ...movie, rating: rateValue };
                 const updatedMap = ratedMap.map((m) => {
                     return m.id === movie.id ? {...m, ...updatedMovie} : m

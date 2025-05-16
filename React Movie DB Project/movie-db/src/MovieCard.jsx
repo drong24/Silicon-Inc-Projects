@@ -10,7 +10,7 @@ import { useUser } from "./Context/UserContext";
 export default function MovieCard(props) {
 
     const { user } = useUser();
-    const { favoritesMap, setFavoritestMap } = useContext(FavoritesContext);
+    const { favoritesMap, setFavoritesMap } = useContext(FavoritesContext);
     const [favorite, setFavorite] = useState();
     useEffect(() => {
         if (favoritesMap) {
@@ -26,12 +26,12 @@ export default function MovieCard(props) {
             console.log(props.movie.id);
             toggleFavorite({movieId:props.movie.id, isFavorite:newFavorite});
             if (newFavorite) {
-                setFavoritestMap([...favoritesMap, props.movie]);
+                setFavoritesMap([...favoritesMap, props.movie]);
             } else {
                 const newFavoritesMap = favoritesMap.filter((movie) => {
                     return movie.id !== props.movie.id;
                 });
-                setFavoritestMap(newFavoritesMap);
+                setFavoritesMap(newFavoritesMap);
             }
         }
     }

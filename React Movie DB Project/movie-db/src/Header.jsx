@@ -15,10 +15,12 @@ export default function Header(props) {
     const { setRatedMap } = useContext(RatedContext);
 
     const handleLogout = () => {
+        console.log("logged out!")
         localStorage.removeItem('user');
         setUser(null);
         setFavoritesMap([]);
         setRatedMap([]);
+        window.location.reload();
     }
     
     useEffect(() => {
