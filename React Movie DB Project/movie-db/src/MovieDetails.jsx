@@ -11,11 +11,9 @@ export default function MovieDetails() {
     const [movie, setMovie] = useState(null);
     const [rateValue, setRateValue] = useState("1");
     const { movieId } = useParams();
-    const [loading, setLaoding] = useState(false);
     const { user } = useUser();
 
     useEffect(() => {
-        console.log("Effect");
         fetchMovieDetails(movieId).then((data) => {
             setMovie(data);
         });
@@ -25,10 +23,9 @@ export default function MovieDetails() {
         if(!user) {
             return;
         }
-        setLaoding(true);
+
         rateMovie(movie.id, rateValue).then(() => {
             const foundMovie = ratedMap.find((m) => {
-                console.log(m.id + " " + movie.id + "/" + movieId);
                 return m.id === movie.id;
             })
             console.log(foundMovie);
@@ -37,16 +34,13 @@ export default function MovieDetails() {
                 setRatedMap([ ...ratedMap, updatedMovie ]);
             }
             else {
-                console.log("exists!");
                 const updatedMovie = { ...movie, rating: rateValue };
                 const updatedMap = ratedMap.map((m) => {
                     return m.id === movie.id ? {...m, ...updatedMovie} : m
                 });
-                console.log(updatedMap);
                 setRatedMap(updatedMap);
             }
             setRated(rateValue);
-            setLaoding(false);
         });
     };
 

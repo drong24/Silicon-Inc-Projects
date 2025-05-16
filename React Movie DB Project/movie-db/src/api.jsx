@@ -1,7 +1,5 @@
 import React from 'react';
-import { useState, useContext } from 'react';
 import axios from 'axios';
-import { MoviesContext } from './Context/MoviesContext';
 
 
 const API_KEY = "124471754942997e76b157aefcfb80c2";
@@ -69,7 +67,6 @@ export const login = async (values) => {
     try {
         const { data: { request_token } } = await client.get(`/authentication/token/new`);
         await client.post('/authentication/token/validate_with_login', {username, password, request_token});
-        console.log(request_token);
         const {data: {session_id}} = await client.post(`/authentication/session/new`, {request_token});
         client.defaults.params = {...client.defaults.params, session_id}
         const { data } = await client.get('/account');
@@ -80,7 +77,6 @@ export const login = async (values) => {
             request_token: request_token
         };
         localStorage.setItem('user', JSON.stringify(userData));
-        console.log(userData); 
         return userData;       
     }
     catch (e) {
@@ -102,9 +98,7 @@ export const toggleFavorite = async (params) => {
     }
     catch(e) {
         console.log("toggleFavorite error: " + e);
-    }
-    console.log("Success! " + account_id + " " + media_id + " " + favorite);
-    
+    }    
 }
 
 export const fetchFavorites = async () => {
@@ -121,11 +115,6 @@ export const fetchFavorites = async () => {
 }
 
 export const rateMovie = async(movie_id, value) => {
-    const user = localStorage.getItem("user");
-    if (!user) {
-        console.log("Not logged in.");
-        return null;
-    }
 
     try {
         await client.post(`/movie/${movie_id}/rating`, {value})

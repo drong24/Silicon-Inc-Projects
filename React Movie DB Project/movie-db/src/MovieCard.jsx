@@ -12,6 +12,7 @@ export default function MovieCard(props) {
     const { user } = useUser();
     const { favoritesMap, setFavoritesMap } = useContext(FavoritesContext);
     const [favorite, setFavorite] = useState();
+
     useEffect(() => {
         if (favoritesMap) {
             const found = favoritesMap.find((obj) => obj.id === props.movie.id);
@@ -23,7 +24,6 @@ export default function MovieCard(props) {
         if (user) {
             const newFavorite = !favorite
             setFavorite(newFavorite);
-            console.log(props.movie.id);
             toggleFavorite({movieId:props.movie.id, isFavorite:newFavorite});
             if (newFavorite) {
                 setFavoritesMap([...favoritesMap, props.movie]);

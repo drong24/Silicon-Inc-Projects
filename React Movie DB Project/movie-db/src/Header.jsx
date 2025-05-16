@@ -1,12 +1,11 @@
 
 import React from "react";
-import { useState, useEffect } from "react";
-import { Routes, Route, Link} from 'react-router'
+import { useEffect, useContext } from "react";
+import { Link} from 'react-router'
 import { TABS } from "./constants";
 import { useUser } from "./Context/UserContext";
 import { FavoritesContext } from "./Context/FavoritesContext";
 import { RatedContext } from "./Context/RatedContext";
-import { useContext } from "react";
 
 export default function Header(props) {
 

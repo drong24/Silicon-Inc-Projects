@@ -1,6 +1,5 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
-import { fetchFavorites } from "./api";
+import { useContext } from "react";
 import { useUser } from "./Context/UserContext";
 import MovieCard from "./MovieCard";
 import { FavoritesContext } from './Context/FavoritesContext';
@@ -8,9 +7,8 @@ import { FavoritesContext } from './Context/FavoritesContext';
 
 export default function Favorites() {
 
-    const user = useUser();
     const { favoritesMap } = useContext(FavoritesContext);
-    console.log(favoritesMap);
+
     return (
         <div className="favorites_container">
             <h2>Favorite Movies</h2>
