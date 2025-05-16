@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { fetchMovieDetails, rateMovie } from "./api";
 import { useParams, Link } from "react-router";
 import { RatedContext } from "./Context/RatedContext";
-
+import { useUser } from "./Context/UserContext";
 
 export default function MovieDetails() {
 
@@ -12,6 +12,7 @@ export default function MovieDetails() {
     const [rateValue, setRateValue] = useState("1");
     const { movieId } = useParams();
     const [loading, setLaoding] = useState(false);
+    const { user } = useUser();
 
     useEffect(() => {
         console.log("Effect");
@@ -21,6 +22,9 @@ export default function MovieDetails() {
     },[fetchMovieDetails, movieId, ratedMap])
 
     const handleRate = () => {
+        if(!user) {
+            return;
+        }
         setLaoding(true);
         rateMovie(movie.id, rateValue).then(() => {
             const foundMovie = ratedMap.find((m) => {
