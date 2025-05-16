@@ -37,6 +37,7 @@ export default function Login() {
                 catch(e) {
                     console.log("Login Failed: " + e);
                     setError(true);
+                    setLoading(false);
                 }
             }}
             validationSchema={Yup.object().shape({

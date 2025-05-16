@@ -30,7 +30,7 @@ export default function Header(props) {
                     <Link to="/">HOME</Link>
                 </li>
                 <li active={props.activeTab === TABS.LIKED ? TABS.LIKED : undefined} onClick={() => props.onClick(TABS.LIKED)}>
-                    <Link to="/favorites">LIKED</Link>
+                    <Link to="/favorites">FAVORITE</Link>
                 </li>
                 <li active={props.activeTab === TABS.RATED ? TABS.RATED : undefined} onClick={() => props.onClick(TABS.RATED)}>
                     <Link to="/rated">RATED</Link>

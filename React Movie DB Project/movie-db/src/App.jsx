@@ -39,7 +39,7 @@ function App() {
       });
       console.log("at app.jsx useEffect");
   }
-  },[]);
+  },[user]);
 
   return (
     <MoviesContext.Provider value={{ moviesMap, setMoviesMap }}>

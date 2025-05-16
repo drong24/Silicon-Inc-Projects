@@ -10,32 +10,44 @@ export default function MovieDetails() {
     const [rated, setRated] = useState();
     const [movie, setMovie] = useState(null);
     const [rateValue, setRateValue] = useState("1");
-    const params = useParams();
+    const { movieId } = useParams();
+    const [loading, setLaoding] = useState(false);
 
     useEffect(() => {
-        fetchMovieDetails(params.movieId).then((data) => {
+        console.log("Effect");
+        fetchMovieDetails(movieId).then((data) => {
             setMovie(data);
-            const found = ratedMap.find((movie) => {
-                return movie.id === data.id;
-            })
-            if (found) {
-                console.log(found.rating);
-                setRated(found.rating);
-            }
         });
-    },[ratedMap])
+    },[fetchMovieDetails, movieId, ratedMap])
 
     const handleRate = () => {
+        setLaoding(true);
         rateMovie(movie.id, rateValue).then(() => {
-            const found = ratedMap.find((m) => {
+            const foundMovie = ratedMap.find((m) => {
+                console.log(m.id + " " + movie.id + "/" + movieId);
                 return m.id === movie.id;
             })
-            if (!found) {
-                setRatedMap([ ...ratedMap, movie ]);
+            console.log(foundMovie);
+            if (!foundMovie) {
+                console.log(movie);
+                console.log(rateValue);
+                const updatedMovie = { ...movie, rating: rateValue };
+                console.log(updatedMovie);
+                setRatedMap([ ...ratedMap, updatedMovie ]);
+            }
+            else {
+                console.log("exists!");
+                console.log(rateValue);
+                const updatedMovie = { ...movie, rating: rateValue };
+                const updatedMap = ratedMap.map((m) => {
+                    return m.id === movie.id ? {...m, ...updatedMovie} : m
+                });
+                console.log(updatedMap);
+                setRatedMap(updatedMap);
             }
             setRated(rateValue);
+            setLaoding(false);
         });
-        console.log(ratedMap);
     };
 
     if (!movie) {
@@ -71,7 +83,9 @@ export default function MovieDetails() {
                 </div>
                 <h3>Your Rating</h3>
                 <div>
-                    {rated ? rated : "Not Yet"}
+                    {
+                    ratedMap.find((m) => m.id === movie.id)?.rating ?? 'Not yet'
+                    }
                 </div>
                 <div>
                     <select name="rating" className="movie_rating_select" value={rateValue} onChange={e => setRateValue(e.target.value)}>

@@ -5,7 +5,7 @@ export default function Pagination(props) {
         <div>
             <button onClick={props.onPrev}>Prev</button>
             <p>{props.currentPage} / {props.totalPages}</p>
-            <button onClick={props.onNext}>Prev</button>
+            <button onClick={props.onNext}>Next</button>
         </div>
     );
 }
