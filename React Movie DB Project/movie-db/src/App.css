@@ -166,6 +166,10 @@ header > ul {
 
 /* Movie Details */
 
+.details_container  > h2 {
+  font-size: 2.4rem;
+}
+
 .details_container > h3 {
   margin-top: 12px;
   margin-bottom: 5px;
@@ -202,6 +206,9 @@ header > ul {
   margin-right: 10px;
 }
 
+.movie_rating_avg > .rating-icon{
+  color: #f5c518;
+}
 .movie_rating_avg {
   display: flex;
 }

@@ -55,7 +55,6 @@ export default function MovieDetails() {
             </div>
             <div className="details_container">
                 <h2>{movie.title}</h2>
-                <br />
                 <h3>Release Date</h3>
                 <p>{movie.release_date}</p>
                 <h3>Overview</h3>
