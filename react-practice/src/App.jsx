@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  let [arrayData, setArrayData] = useState([]);
+  let [inputText, setInputText] = useState("");
+ 
+  useEffect(() => {
+    fetch(
+      'https://jsonplaceholder.typicode.com/photos'
+    )
+    .then((resp) => {
+        if (resp.ok) {
+          return resp.json();
+        }
+    })
+    .then((data) => {
+      console.log(data.slice(0, 20));
+      setArrayData(data.slice(0, 20));
+    })
+  },[]);
+
+  useEffect(() => {
+    console.log(inputText);
+  },[inputText])
+
+  const handleInputChange = (event) => {
+    setInputText(event.target.value);
+  }
 
   return (
-    <>
+    <div className="main">
       <div>
-        
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <input type="text" value={inputText} onChange={handleInputChange}/>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="grid">
+        {arrayData.map((e) => {
+          if (e.title.includes(inputText)) {
+            return (
+              <div>
+                <img src={e.url}/>
+                <span>{e.title}</span>
+              </div>
+            )
+          }
+        })}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
