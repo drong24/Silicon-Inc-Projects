@@ -1,53 +1,49 @@
-import { useState, useEffect } from 'react'
-import './App.css'
+import react from 'react';
+import { useState, useEffect } from 'react';
 
-function App() {
+export default function App() {
 
-  let [arrayData, setArrayData] = useState([]);
-  let [inputText, setInputText] = useState("");
- 
+  let [data, setData] = useState([]);
+  let [inputValue, setInputValue] = useState("");
+
   useEffect(() => {
-    fetch(
+    fetch (
       'https://jsonplaceholder.typicode.com/photos'
     )
     .then((resp) => {
-        if (resp.ok) {
-          return resp.json();
-        }
+      if (resp.ok) {
+        return resp.json();
+      }
     })
     .then((data) => {
-      console.log(data.slice(0, 20));
-      setArrayData(data.slice(0, 20));
+      setData(data.splice(0, 20));
     })
-  },[]);
+  },[])
 
-  useEffect(() => {
-    console.log(inputText);
-  },[inputText])
-
-  const handleInputChange = (event) => {
-    setInputText(event.target.value);
+  const onInputChange = (e) => {
+    console.log(e.target.value);
+    setInputValue(e.target.value);
   }
 
   return (
     <div className="main">
-      <div className="input-containter">
-        <input type="text" value={inputText} onChange={handleInputChange}/>
-      </div>
+      <div className="input-container">
+        <input className="input" type="text" value={inputValue} onChange={onInputChange}/>
+        </div>
       <div className="grid">
-        {arrayData.map((e) => {
-          if (e.title.includes(inputText)) {
-            return (
-              <div>
-                <img src={e.url}/>
-                <span>{e.title}</span>
-              </div>
-            )
-          }
-        })}
+        {
+          data.map((dataItem) => {
+            if (dataItem.title.includes(inputValue)) {
+              return (
+                <div className="grid-item">
+                  <img src={dataItem.url}/>
+                  <span>{dataItem.title}</span>
+                </div>
+              )
+            }
+          })
+        }
       </div>
     </div>
   )
 }
-
-export default App
