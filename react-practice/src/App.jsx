@@ -31,7 +31,7 @@ function App() {
 
   return (
     <div className="main">
-      <div>
+      <div className="input-containter">
         <input type="text" value={inputText} onChange={handleInputChange}/>
       </div>
       <div className="grid">
